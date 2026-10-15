@@ -2,7 +2,7 @@
 // Loaded by the page and by the service worker, so it assigns to `self`.
 self.KIOSK_CONFIG = {
   // Header text from design 4a.
-  eyebrow: 'CHINMAYA INTERNATIONAL RESIDENTIAL SCHOOL',
+  eyebrow: 'CIRS',
   headline: 'Touch a topic to watch',
   tagline: 'Keep Smiling',
 

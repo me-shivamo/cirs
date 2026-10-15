@@ -3,7 +3,7 @@
    - Videos saved by the setup screen live in the 'kiosk-videos' cache and are served with
      byte ranges (206), which the browser's video player needs to start and seek.
    - A video that is not saved streams from the network instead. */
-var VERSION = '20261015-0753';
+var VERSION = '20261015-0754';
 var SHELL_CACHE = 'kiosk-shell-' + VERSION;
 var VIDEO_CACHE = 'kiosk-videos';
 
