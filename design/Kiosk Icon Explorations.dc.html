@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/light/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
+<style>
+html,body{margin:0;background:#e9e0d2}*{box-sizing:border-box}
+a{color:oklch(0.55 0.15 50)}a:hover{color:oklch(0.45 0.15 45)}
+</style>
+</helmet>
+
+<section style="padding:80px 80px 0;display:flex;flex-direction:column;gap:48px;font-family:'Mukta',sans-serif;color:#2a1a12">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:1400px">
+<div style="font:600 22px/1 'Mukta',sans-serif;letter-spacing:.16em;color:oklch(0.55 0.15 50)">ROUND 6 · PHOTO-LED</div>
+<div style="font:400 72px/1.05 'Marcellus',serif">Real pictures, small icons</div>
+<div style="font:400 28px/1.4 'Mukta',sans-serif;color:#5a4536;text-wrap:pretty">Each topic is shown by a photo, with a small icon to help people spot it. 11 frames are pre-filled with free-to-use photos from Wikimedia Commons (credits below); the 7 Chinmaya-specific topics have no public photo, so their frames are empty. <b>Drag your own photo onto any frame</b> to replace or fill it.</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start">
+
+<div id="6a" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">6a</div><div style="font:400 36px/1 'Marcellus',serif">Photo Wall</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Full-bleed photo cards, title and icon sitting on the picture.</div></div>
+<div style="width:1920px;height:1080px;background:#f6efe3;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(60,30,10,.5)">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;padding:44px 72px 0">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="font:500 24px/1 'Mukta',sans-serif;letter-spacing:.12em;color:#6b5444">CHINMAYA VIDYALAYA · A CHINMAYA MISSION INSTITUTION</div>
+<div style="font:400 64px/1 'Marcellus',serif;color:oklch(0.30 0.08 30)">Touch a topic to watch</div>
+</div>
+<div style="font:400 40px/1 'Marcellus',serif;color:oklch(0.55 0.15 50)">Keep Smiling</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:18px;padding:30px 72px 48px">
+<sc-for list="{{ icons6 }}" as="i" hint-placeholder-count="18">
+<div style="position:relative;border-radius:22px;overflow:hidden;background:#e4d8c4;box-shadow:0 14px 24px -16px rgba(60,30,10,.6)">
+<image-slot id="p6a-{{ i.no }}" shape="rect" placeholder="{{ i.photo }}" src="{{ i.src }}"></image-slot>
+<div style="position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(180deg, rgba(28,14,6,0), rgba(28,14,6,.86));pointer-events:none"></div>
+<div style="position:absolute;left:16px;top:16px;width:56px;height:56px;border-radius:50%;background:{{ i.solid }};border:3px solid #fff;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 4px 10px rgba(0,0,0,.25)"><i class="ph-fill ph-{{ i.ic }}" style="font-size:28px;color:#fff"></i></div>
+<div style="position:absolute;left:18px;right:18px;bottom:16px;font:600 26px/1.1 'Mukta',sans-serif;color:#fff;text-wrap:balance;pointer-events:none">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div id="6b" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">6b</div><div style="font:400 36px/1 'Marcellus',serif">Photo Album · Grouped</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Polaroid-style cards grouped by institution — Vidyalayas, CACS, CAM.</div></div>
+<div style="width:1920px;height:1080px;background:#f6efe3;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(60,30,10,.5)">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:40px 72px 0">
+<div style="font:400 60px/1 'Marcellus',serif;color:oklch(0.30 0.08 30)">Chinmaya Vidyalaya · Stories</div>
+<div style="font:500 26px/1 'Mukta',sans-serif;color:#6b5444">Touch a photo to watch</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,1fr);gap:40px;padding:28px 72px 44px;min-height:0">
+<div style="display:flex;flex-direction:column;gap:14px;min-height:0">
+<div style="display:flex;align-items:center;gap:12px;font:600 24px/1 'Mukta',sans-serif;letter-spacing:.1em;color:oklch(0.50 0.14 50)"><div style="width:14px;height:14px;border-radius:50%;background:oklch(0.62 0.15 55)"></div>CHINMAYA VIDYALAYAS</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:16px;min-height:0">
+<sc-for list="{{ cv6 }}" as="i" hint-placeholder-count="12">
+<div style="background:#fffdf8;border-radius:10px;padding:10px 10px 0;display:flex;flex-direction:column;box-shadow:0 10px 20px -12px rgba(60,30,10,.5);min-height:0">
+<div style="flex:1;position:relative;border-radius:6px;overflow:hidden;background:#e4d8c4;min-height:0"><image-slot id="p6b-{{ i.no }}" shape="rect" placeholder="{{ i.photo }}" src="{{ i.src }}"></image-slot></div>
+<div style="display:flex;align-items:center;gap:10px;padding:10px 4px 12px"><i class="ph-fill ph-{{ i.ic }}" style="font-size:26px;color:{{ i.ink }};flex:none"></i><div style="font:600 23px/1.1 'Mukta',sans-serif;color:#2a1a12;text-wrap:balance">{{ i.title }}</div></div>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:28px;min-height:0">
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;min-height:0">
+<div style="display:flex;align-items:center;gap:12px;font:600 24px/1 'Mukta',sans-serif;letter-spacing:.1em;color:oklch(0.48 0.15 25)"><div style="width:14px;height:14px;border-radius:50%;background:oklch(0.55 0.15 25)"></div>CACS</div>
+<sc-for list="{{ cacs6 }}" as="i" hint-placeholder-count="3">
+<div style="flex:1;background:#fffdf8;border-radius:10px;padding:10px;display:flex;gap:16px;align-items:stretch;box-shadow:0 10px 20px -12px rgba(60,30,10,.5);min-height:0">
+<div style="width:170px;flex:none;position:relative;border-radius:6px;overflow:hidden;background:#e4d8c4"><image-slot id="p6b-{{ i.no }}" shape="rect" placeholder="{{ i.photo }}" src="{{ i.src }}"></image-slot></div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:6px"><i class="ph-fill ph-{{ i.ic }}" style="font-size:28px;color:{{ i.ink }}"></i><div style="font:600 24px/1.1 'Mukta',sans-serif;color:#2a1a12;text-wrap:balance">{{ i.title }}</div></div>
+</div>
+</sc-for>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:14px;min-height:0">
+<div style="display:flex;align-items:center;gap:12px;font:600 24px/1 'Mukta',sans-serif;letter-spacing:.1em;color:oklch(0.44 0.10 155)"><div style="width:14px;height:14px;border-radius:50%;background:oklch(0.52 0.10 155)"></div>CHINMAYA ACADEMY OF MANAGEMENT</div>
+<sc-for list="{{ cam6 }}" as="i" hint-placeholder-count="3">
+<div style="flex:1;background:#fffdf8;border-radius:10px;padding:10px;display:flex;gap:16px;align-items:stretch;box-shadow:0 10px 20px -12px rgba(60,30,10,.5);min-height:0">
+<div style="width:170px;flex:none;position:relative;border-radius:6px;overflow:hidden;background:#e4d8c4"><image-slot id="p6b-{{ i.no }}" shape="rect" placeholder="{{ i.photo }}" src="{{ i.src }}"></image-slot></div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:6px"><i class="ph-fill ph-{{ i.ic }}" style="font-size:28px;color:{{ i.ink }}"></i><div style="font:600 24px/1.1 'Mukta',sans-serif;color:#2a1a12;text-wrap:balance">{{ i.title }}</div></div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;max-width:1920px">
+<div style="font:400 36px/1 'Marcellus',serif">Photo credits</div>
+<div style="font:400 20px/1.4 'Mukta',sans-serif;color:#5a4536">Wikimedia Commons, free licences (CC BY / CC BY-SA / CC0 / GODL-India). Keep this list with the kiosk if these photos are used.</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 32px">
+<sc-for list="{{ credits6 }}" as="c" hint-placeholder-count="11">
+<div style="font:400 19px/1.35 'Mukta',sans-serif;color:#5a4536"><b style="color:#2a1a12">{{ c.no }} · {{ c.title }}</b> — <a href="{{ c.page }}" target="_blank">{{ c.file }}</a>, {{ c.author }}</div>
+</sc-for>
+</div>
+</div>
+<div style="height:2px;background:#d6c8b4;margin-top:24px"></div>
+</section>
+
+<section style="padding:80px 80px 0;display:flex;flex-direction:column;gap:48px;font-family:'Mukta',sans-serif;color:#2a1a12">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:1400px">
+<div style="font:600 22px/1 'Mukta',sans-serif;letter-spacing:.16em;color:oklch(0.55 0.15 50)">ROUND 5 · COMPLETELY NEW DIRECTIONS</div>
+<div style="font:400 72px/1.05 'Marcellus',serif">No circles, no illustrations</div>
+<div style="font:400 28px/1.4 'Mukta',sans-serif;color:#5a4536;text-wrap:pretty">Two fresh styles. <b>5a</b> is a bold geometric mosaic — flat colour blocks and shapes, poster-like. <b>5b</b> is a playful sticker board — chunky tilted stickers that invite little fingers to tap.</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start">
+
+<div id="5a" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">5a</div><div style="font:400 36px/1 'Marcellus',serif">Geometric Mosaic</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Edge-to-edge colour blocks, one bold shape and glyph per topic.</div></div>
+<div style="width:1920px;height:1080px;background:#1f1b16;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(20,15,10,.6)">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:140px;flex:none">
+<div style="display:flex;align-items:baseline;gap:28px">
+<div style="font:900 60px/1 'Archivo',sans-serif;color:#f3ead8;letter-spacing:-.01em">CHINMAYA VIDYALAYA</div>
+<div style="font:500 30px/1 'Archivo',sans-serif;color:oklch(0.83 0.15 85)">Touch a topic to watch</div>
+</div>
+<div style="display:flex;gap:10px"><div style="width:36px;height:36px;border-radius:50%;background:oklch(0.72 0.17 55)"></div><div style="width:36px;height:36px;background:oklch(0.83 0.15 85)"></div><div style="width:36px;height:36px;border-radius:36px 0 0 0;background:oklch(0.55 0.19 25)"></div></div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:6px;padding:0 6px 6px">
+<sc-for list="{{ icons5 }}" as="i" hint-placeholder-count="18">
+<div style="position:relative;overflow:hidden;background:{{ i.bg }};display:flex;flex-direction:column;justify-content:space-between;padding:22px 24px 24px">
+<div style="position:absolute;right:{{ i.sr }}px;top:{{ i.st }}px;width:{{ i.sw }}px;height:{{ i.sh }}px;border-radius:{{ i.rad }};background:{{ i.shape }};transform:rotate({{ i.rot }}deg)"></div>
+<div style="position:absolute;right:{{ i.sr }}px;top:{{ i.st }}px;width:{{ i.sw }}px;height:{{ i.sh }}px;display:flex;align-items:center;justify-content:center"><i class="ph-bold ph-{{ i.ic }}" style="font-size:{{ i.gs }}px;color:{{ i.glyph }}"></i></div>
+<div style="position:relative;font:800 24px/1 'Archivo',sans-serif;color:{{ i.label }};opacity:.75">{{ i.no }}</div>
+<div style="position:relative;font:800 27px/1.08 'Archivo',sans-serif;color:{{ i.label }};text-wrap:balance;max-width:250px">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div id="5b" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">5b</div><div style="font:400 36px/1 'Marcellus',serif">Sticker Board</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Chunky die-cut stickers on marigold, slightly tilted like a scrapbook.</div></div>
+<div style="width:1920px;height:1080px;background:oklch(0.86 0.13 85);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(80,50,0,.5)">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:44px 96px 0">
+<div style="font:900 72px/1 'Archivo',sans-serif;color:#1f1b16;letter-spacing:-.02em">Touch a topic to watch!</div>
+<div style="font:800 30px/1 'Archivo',sans-serif;color:#fff;background:oklch(0.55 0.19 25);padding:16px 26px;border-radius:14px;transform:rotate(3deg);box-shadow:0 6px 0 rgba(31,27,22,.25)">KEEP SMILING</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:4px 24px;padding:28px 96px 40px">
+<sc-for list="{{ icons5 }}" as="i" hint-placeholder-count="18">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center">
+<div style="width:168px;height:168px;border-radius:44px;background:{{ i.sticker }};border:10px solid #fff;box-shadow:0 10px 0 rgba(31,27,22,.18), 0 18px 24px -12px rgba(31,27,22,.35);display:flex;align-items:center;justify-content:center;transform:rotate({{ i.tilt }}deg)"><i class="ph-fill ph-{{ i.ic }}" style="font-size:92px;color:#fff"></i></div>
+<div style="font:800 24px/1.1 'Archivo',sans-serif;color:#1f1b16;background:#fff;padding:8px 14px 7px;border-radius:10px;text-wrap:balance;max-width:260px;transform:rotate({{ i.ntilt }}deg)">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+</div>
+<div style="height:2px;background:#d6c8b4;margin-top:24px"></div>
+</section>
+
+<section style="padding:80px 80px 0;display:flex;flex-direction:column;gap:48px;font-family:'Mukta',sans-serif;color:#2a1a12">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:1400px">
+<div style="font:600 22px/1 'Mukta',sans-serif;letter-spacing:.16em;color:oklch(0.55 0.15 50)">ROUND 4 · YOUR REFERENCE ICONS, ALL 18</div>
+<div style="font:400 72px/1.05 'Marcellus',serif">Exact reference style</div>
+<div style="font:400 28px/1.4 'Mukta',sans-serif;color:#5a4536;text-wrap:pretty">11 icons are cut directly from your image. The 7 marked <b>NEW</b> had no match, so they’re built to sit alongside them — same gradient discs, colour family and label style.</div>
+</div>
+<div id="4a" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">4a</div><div style="font:400 36px/1 'Marcellus',serif">Kiosk home · 18 topics</div></div>
+<div style="width:1920px;height:1080px;background:#fbfaf7;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(20,30,70,.4)">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;padding:48px 96px 0">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="font:700 24px/1 'Baloo 2',sans-serif;letter-spacing:.12em;color:#4a5578">CHINMAYA VIDYALAYA</div>
+<div style="font:800 64px/1 'Baloo 2',sans-serif;color:#1b2a78">Touch a topic to watch</div>
+</div>
+<div style="font:700 40px/1 'Baloo 2',sans-serif;color:#f08a1c">Keep Smiling</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:4px 24px;padding:24px 96px 40px">
+<sc-for list="{{ icons4 }}" as="i" hint-placeholder-count="18">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;position:relative">
+<div style="width:200px;height:200px;border-radius:50%;position:relative;overflow:hidden;background:linear-gradient(160deg, {{ i.v1 }}, {{ i.v2 }});box-shadow:0 16px 28px -18px rgba(20,30,90,.55)">
+<sc-if value="{{ i.crop }}" hint-placeholder-val="{{ true }}"><img src="{{ i.crop }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+<sc-if value="{{ i.main }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 22%, rgba(255,255,255,.35), rgba(255,255,255,0) 55%)"></div>
+<img src="{{ i.main }}" alt="" style="position:absolute;left:30px;top:26px;width:132px;height:132px;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(10,20,70,.3))">
+<img src="{{ i.acc }}" alt="" style="position:absolute;right:20px;bottom:22px;width:72px;height:72px;object-fit:contain;filter:drop-shadow(0 4px 6px rgba(10,20,70,.35))">
+</sc-if>
+<sc-if value="{{ i.play }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;right:22px;bottom:22px;width:64px;height:64px;border-radius:50%;background:#e8322c;border:4px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 12px rgba(0,0,0,.3)"><div style="width:0;height:0;border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px"></div></div></sc-if>
+</div>
+<sc-if value="{{ i.isNew }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;top:6px;right:18px;font:800 15px/1 'Baloo 2',sans-serif;letter-spacing:.08em;background:#1b2a78;color:#fff;padding:6px 10px 4px;border-radius:20px">NEW</div></sc-if>
+<div style="font:700 25px/1.08 'Baloo 2',sans-serif;color:#1b2a78;text-wrap:balance;min-height:54px;display:flex;align-items:flex-start;justify-content:center">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+<div style="height:2px;background:#d6c8b4;margin-top:24px"></div>
+</section>
+
+<section style="padding:80px 80px 0;display:flex;flex-direction:column;gap:48px;font-family:'Mukta',sans-serif;color:#2a1a12">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:1400px">
+<div style="font:600 22px/1 'Mukta',sans-serif;letter-spacing:.16em;color:oklch(0.55 0.15 50)">ROUND 3 · REAL ILLUSTRATIONS</div>
+<div style="font:400 72px/1.05 'Marcellus',serif">Illustrated badges — real artwork</div>
+<div style="font:400 28px/1.4 'Mukta',sans-serif;color:#5a4536;text-wrap:pretty">Built with Microsoft’s Fluent illustration set (free, MIT licence — safe for school use). Each badge combines two illustrations into a small scene, like your reference. <b>3a</b> uses the glossy 3D artwork on vivid circles; <b>3b</b> uses the flat artwork on warm Chinmaya circles.</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start">
+
+<div id="3a" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">3a</div><div style="font:400 36px/1 'Marcellus',serif">3D Illustrated Badges</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Glossy 3D artwork on bright gradient circles — closest to your reference.</div></div>
+<div style="width:1920px;height:1080px;background:#fbfaf7;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(20,30,70,.4)">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;padding:52px 96px 0">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="font:600 24px/1 'Mukta',sans-serif;letter-spacing:.12em;color:#4a5578">CHINMAYA VIDYALAYA</div>
+<div style="font:700 64px/1 'Mukta',sans-serif;color:#1a2560">Touch a topic to watch</div>
+</div>
+<div style="font:400 40px/1 'Marcellus',serif;color:oklch(0.60 0.16 55)">Keep Smiling</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:8px 24px;padding:32px 96px 48px">
+<sc-for list="{{ icons }}" as="i" hint-placeholder-count="18">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center">
+<div style="width:190px;height:190px;border-radius:50%;background:radial-gradient(circle at 30% 25%, {{ i.v1 }}, {{ i.v2 }} 80%);box-shadow:0 18px 30px -16px {{ i.v2 }}, inset 0 -10px 24px rgba(0,0,0,.15);position:relative">
+<img src="{{ i.main3d }}" alt="" style="position:absolute;left:26px;top:22px;width:126px;height:126px;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.25))">
+<img src="{{ i.acc3d }}" alt="" style="position:absolute;right:10px;bottom:12px;width:76px;height:76px;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(0,0,0,.3))">
+</div>
+<div style="font:700 25px/1.12 'Mukta',sans-serif;color:#1a2560;text-wrap:balance">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div id="3b" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">3b</div><div style="font:400 36px/1 'Marcellus',serif">Flat Illustrated · Chinmaya</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Flat artwork on cream discs with saffron, kumkum and tulsi rings — warm and on-brand.</div></div>
+<div style="width:1920px;height:1080px;background:#f6efe3;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(60,30,10,.5)">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;padding:52px 96px 0">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="font:500 24px/1 'Mukta',sans-serif;letter-spacing:.12em;color:#6b5444">CHINMAYA VIDYALAYA · A CHINMAYA MISSION INSTITUTION</div>
+<div style="font:400 68px/1 'Marcellus',serif;color:oklch(0.30 0.08 30)">Touch a topic to watch</div>
+</div>
+<div style="font:400 40px/1 'Marcellus',serif;color:oklch(0.55 0.15 50)">Keep Smiling</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:8px 24px;padding:32px 96px 48px">
+<sc-for list="{{ icons }}" as="i" hint-placeholder-count="18">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center">
+<div style="width:190px;height:190px;border-radius:50%;padding:8px;background:{{ i.solid }};box-shadow:0 18px 30px -16px rgba(80,30,10,.55)">
+<div style="width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 35% 30%, #fffdf7, {{ i.tint }} 85%);position:relative">
+<img src="{{ i.mainFlat }}" alt="" style="position:absolute;left:22px;top:20px;width:112px;height:112px;object-fit:contain">
+<img src="{{ i.accFlat }}" alt="" style="position:absolute;right:8px;bottom:10px;width:66px;height:66px;object-fit:contain">
+</div>
+</div>
+<div style="font:600 25px/1.12 'Mukta',sans-serif;color:oklch(0.30 0.08 30);text-wrap:balance">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+</div>
+<div style="height:2px;background:#d6c8b4;margin-top:24px"></div>
+</section>
+
+<section style="padding:80px 80px 0;display:flex;flex-direction:column;gap:48px;font-family:'Mukta',sans-serif;color:#2a1a12">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:1400px">
+<div style="font:600 22px/1 'Mukta',sans-serif;letter-spacing:.16em;color:oklch(0.55 0.15 50)">ROUND 2 · ILLUSTRATED BADGES (FROM YOUR REFERENCE)</div>
+<div style="font:400 72px/1.05 'Marcellus',serif">Vivid composite badges — two palettes</div>
+<div style="font:400 28px/1.4 'Mukta',sans-serif;color:#5a4536;text-wrap:pretty">Like the reference, each badge has its own colour and combines two symbols (main + accent) to tell a small story. <b>2a</b> keeps the reference's bright multi-colour look; <b>2b</b> uses the same badges in Chinmaya saffron, kumkum, gold and tulsi tones.</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start">
+
+<div id="2a" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">2a</div><div style="font:400 36px/1 'Marcellus',serif">Vivid Badges</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Bright gradient per topic, white icons, navy labels — playful and instantly scannable.</div></div>
+<div style="width:1920px;height:1080px;background:#fbfaf7;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(20,30,70,.4)">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;padding:52px 96px 0">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="font:600 24px/1 'Mukta',sans-serif;letter-spacing:.12em;color:#4a5578">CHINMAYA VIDYALAYA</div>
+<div style="font:700 64px/1 'Mukta',sans-serif;color:#1a2560">Touch a topic to watch</div>
+</div>
+<div style="font:400 40px/1 'Marcellus',serif;color:oklch(0.60 0.16 55)">Keep Smiling</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:8px 24px;padding:32px 96px 48px">
+<sc-for list="{{ icons }}" as="i" hint-placeholder-count="18">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center">
+<div style="width:184px;height:184px;border-radius:50%;background:radial-gradient(circle at 30% 25%, {{ i.v1 }}, {{ i.v2 }} 78%);box-shadow:0 18px 30px -16px {{ i.v2 }}, inset 0 -10px 24px rgba(0,0,0,.15);position:relative;display:flex;align-items:center;justify-content:center;color:#fff">
+<i class="ph-fill ph-{{ i.ic2 }}" style="font-size:96px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.18))"></i>
+<div style="position:absolute;right:14px;bottom:18px;width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:{{ i.v2 }};box-shadow:0 6px 14px rgba(0,0,0,.2)"><i class="ph-fill ph-{{ i.acc }}" style="font-size:38px"></i></div>
+</div>
+<div style="font:700 25px/1.12 'Mukta',sans-serif;color:#1a2560;text-wrap:balance">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div id="2b" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">2b</div><div style="font:400 36px/1 'Marcellus',serif">Chinmaya Badges</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Same composite badges, warm Chinmaya gradients with a gold ring — festive but on-brand.</div></div>
+<div style="width:1920px;height:1080px;background:#f6efe3;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(60,30,10,.5)">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;padding:52px 96px 0">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="font:500 24px/1 'Mukta',sans-serif;letter-spacing:.12em;color:#6b5444">CHINMAYA VIDYALAYA · A CHINMAYA MISSION INSTITUTION</div>
+<div style="font:400 68px/1 'Marcellus',serif;color:oklch(0.30 0.08 30)">Touch a topic to watch</div>
+</div>
+<div style="font:400 40px/1 'Marcellus',serif;color:oklch(0.55 0.15 50)">Keep Smiling</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:8px 24px;padding:32px 96px 48px">
+<sc-for list="{{ icons }}" as="i" hint-placeholder-count="18">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center">
+<div style="width:184px;height:184px;border-radius:50%;padding:6px;background:linear-gradient(160deg,#f3d27a,#b9862c);box-shadow:0 18px 30px -16px rgba(80,30,10,.6)">
+<div style="width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 30% 25%, {{ i.c1 }}, {{ i.c2 }} 80%);position:relative;display:flex;align-items:center;justify-content:center;color:#fff8ec">
+<i class="ph-fill ph-{{ i.ic2 }}" style="font-size:90px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.2))"></i>
+<div style="position:absolute;right:6px;bottom:10px;width:60px;height:60px;border-radius:50%;background:#fff8ec;border:3px solid #e2b85a;display:flex;align-items:center;justify-content:center;color:{{ i.c2 }}"><i class="ph-fill ph-{{ i.acc }}" style="font-size:34px"></i></div>
+</div>
+</div>
+<div style="font:600 25px/1.12 'Mukta',sans-serif;color:oklch(0.30 0.08 30);text-wrap:balance">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+</div>
+<div style="height:2px;background:#d6c8b4;margin-top:24px"></div>
+</section>
+
+<section style="padding:80px;display:flex;flex-direction:column;gap:48px;font-family:'Mukta',sans-serif;color:#2a1a12">
+<div style="display:flex;flex-direction:column;gap:10px;max-width:1400px">
+<div style="font:600 22px/1 'Mukta',sans-serif;letter-spacing:.16em;color:oklch(0.55 0.15 50)">ROUND 1 · ICON DIRECTIONS FOR TEAM REVIEW</div>
+<div style="font:400 72px/1.05 'Marcellus',serif">18-icon kiosk home screen — three directions</div>
+<div style="font:400 28px/1.4 'Mukta',sans-serif;color:#5a4536;text-wrap:pretty">Same symbol set in all three, so the team compares <b>treatment</b>, not meaning. Colour marks the institution: saffron for Chinmaya Vidyalayas (1–12), kumkum for CACS (13–15), tulsi green for CAM (16–18). Each frame is the real 1920×1080 kiosk. Symbol rationale is at the bottom.</div>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:64px;align-items:flex-start">
+
+<div id="1a" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">1a</div><div style="font:400 36px/1 'Marcellus',serif">Diya Tiles</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Light line icons in a saffron halo on cream cards — calm, closest to the current kiosk.</div></div>
+<div style="width:1920px;height:1080px;background:#f6efe3;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(60,30,10,.5)">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;padding:56px 96px 0">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="font:500 24px/1 'Mukta',sans-serif;letter-spacing:.12em;color:#6b5444">CHINMAYA VIDYALAYA · A CHINMAYA MISSION INSTITUTION</div>
+<div style="font:400 72px/1 'Marcellus',serif;color:#2a1a12">Touch a topic to watch</div>
+</div>
+<div style="font:400 40px/1 'Marcellus',serif;color:oklch(0.55 0.15 50)">Keep Smiling</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:24px;padding:44px 96px 64px">
+<sc-for list="{{ icons }}" as="i" hint-placeholder-count="18">
+<div style="background:#fffaf1;border-radius:28px;box-shadow:0 14px 30px -18px rgba(60,30,10,.4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:20px;text-align:center;position:relative">
+<div style="position:absolute;top:18px;left:22px;font:600 20px/1 'Mukta',sans-serif;color:#a08a76">{{ i.no }}</div>
+<div style="width:120px;height:120px;border-radius:50%;background:{{ i.tint }};display:flex;align-items:center;justify-content:center;color:{{ i.ink }}"><i class="ph-light ph-{{ i.ic }}" style="font-size:72px"></i></div>
+<div style="font:500 27px/1.15 'Mukta',sans-serif;color:#2a1a12;text-wrap:balance">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div id="1b" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">1b</div><div style="font:400 36px/1 'Marcellus',serif">Mandala Medallions</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Filled icons inside double-ringed medallions on deep maroon — ceremonial, high contrast.</div></div>
+<div style="width:1920px;height:1080px;background:oklch(0.27 0.07 30);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(60,30,10,.5)">
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:52px 96px 0;text-align:center">
+<div style="font:500 24px/1 'Mukta',sans-serif;letter-spacing:.16em;color:oklch(0.80 0.12 65)">CHINMAYA VIDYALAYA</div>
+<div style="font:400 64px/1 'Marcellus',serif;color:#fff8ec">Touch a medallion to watch</div>
+<div style="width:120px;height:3px;background:oklch(0.70 0.16 55);margin-top:8px"></div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:12px 24px;padding:36px 96px 56px">
+<sc-for list="{{ icons }}" as="i" hint-placeholder-count="18">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center">
+<div style="width:164px;height:164px;border-radius:50%;border:2px dashed {{ i.ring }};padding:10px">
+<div style="width:100%;height:100%;border-radius:50%;background:{{ i.solid }};box-shadow:inset 0 0 0 5px rgba(255,248,236,.25);display:flex;align-items:center;justify-content:center;color:#fff8ec"><i class="ph-fill ph-{{ i.ic }}" style="font-size:64px"></i></div>
+</div>
+<div style="font:500 26px/1.15 'Mukta',sans-serif;color:#fff8ec;text-wrap:balance">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div id="1c" style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:16px"><div style="font:700 26px/1 'Mukta',sans-serif;background:#2a1a12;color:#fff8ec;padding:10px 18px;border-radius:30px">1c</div><div style="font:400 36px/1 'Marcellus',serif">Temple Arches</div><div style="font:400 24px/1 'Mukta',sans-serif;color:#6b5444">Duotone icons in arch-topped panels coloured by institution, grouped into three rows of meaning.</div></div>
+<div style="width:1920px;height:1080px;background:#f6efe3;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -40px rgba(60,30,10,.5)">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:48px 96px 0">
+<div style="font:400 60px/1 'Marcellus',serif;color:#2a1a12">Chinmaya Vidyalaya · Stories</div>
+<div style="display:flex;gap:28px;font:500 24px/1 'Mukta',sans-serif;color:#5a4536">
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:10px"><div style="width:22px;height:22px;border-radius:11px 11px 4px 4px;background:{{ g.solid }}"></div>{{ g.name }}</div></sc-for>
+</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:22px;padding:40px 96px 60px">
+<sc-for list="{{ icons }}" as="i" hint-placeholder-count="18">
+<div style="border-radius:999px 999px 24px 24px;background:{{ i.tint }};border:2px solid {{ i.ring }};display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:12px;padding:20px 18px 26px;text-align:center">
+<i class="ph-duotone ph-{{ i.ic }}" style="font-size:88px;color:{{ i.ink }}"></i>
+<div style="font:400 26px/1.1 'Marcellus',serif;color:#2a1a12;text-wrap:balance;min-height:58px;display:flex;align-items:center">{{ i.title }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+</div>
+
+<div style="display:flex;flex-direction:column;gap:20px;max-width:1920px">
+<div style="font:400 48px/1 'Marcellus',serif">Why each symbol</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+<sc-for list="{{ icons }}" as="i" hint-placeholder-count="18">
+<div style="background:#fffaf1;border-radius:20px;padding:22px 24px;display:flex;gap:20px;align-items:flex-start">
+<div style="width:72px;height:72px;flex:none;border-radius:50%;background:{{ i.tint }};color:{{ i.ink }};display:flex;align-items:center;justify-content:center"><i class="ph-light ph-{{ i.ic }}" style="font-size:42px"></i></div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="font:600 24px/1.2 'Mukta',sans-serif">{{ i.no }} · {{ i.title }}</div>
+<div style="font:500 20px/1.2 'Mukta',sans-serif;color:{{ i.ink }}">{{ i.symbol }}</div>
+<div style="font:400 20px/1.4 'Mukta',sans-serif;color:#5a4536;text-wrap:pretty">{{ i.why }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const G = {
+      cv:   { name: 'Chinmaya Vidyalayas', solid: 'oklch(0.62 0.15 55)', ink: 'oklch(0.50 0.14 50)', tint: 'oklch(0.94 0.04 70)', ring: 'oklch(0.78 0.12 65)' },
+      cacs: { name: 'CACS', solid: 'oklch(0.55 0.15 25)', ink: 'oklch(0.48 0.15 25)', tint: 'oklch(0.94 0.035 30)', ring: 'oklch(0.75 0.12 30)' },
+      cam:  { name: 'CAM', solid: 'oklch(0.52 0.10 155)', ink: 'oklch(0.44 0.10 155)', tint: 'oklch(0.94 0.03 150)', ring: 'oklch(0.74 0.09 150)' },
+    };
+    const raw = [
+      ['Journey of CVs','path','cv','Winding path','A road through milestones — the decades-long growth of the Vidyalaya family.'],
+      ['Resources','books','cv','Stack of books','The library of material teachers and students draw from.'],
+      ['Ed Cell and Govt','bank','cv','Pillared civic building','Partnership with government and education boards.'],
+      ['Children Programs','smiley','cv','Smiling face','Echoes the motto “Keep Smiling” — joy at the heart of every child programme.'],
+      ['Training for Staff','chalkboard-teacher','cv','Teacher at a board','Teachers becoming learners — capacity building for staff.'],
+      ['Scholarship and CSR','hand-coins','cv','Open hand with coins','Giving with an open hand — support for deserving students.'],
+      ['Chinmaya seva camps','hand-heart','cv','Hand holding a heart','Seva: selfless service offered with love.'],
+      ['Chinmaya awards','medal','cv','Medal','Recognition of excellence across the network.'],
+      ['Alumni achievements','graduation-cap','cv','Graduation cap','Students who went out into the world and made their mark.'],
+      ['Festivals','flame','cv','Diya flame','The lamp lit at every Indian festival — light over darkness.'],
+      ['Chinmaya Vision Program','sun-horizon','cv','Rising sun','A new dawn — the holistic vision of education CVP brings.'],
+      ['Video on Ed Cell','monitor-play','cv','Screen with play','Signals this tile is a film about the Ed Cell.'],
+      ['Journey of CACS','mountains','cacs','Mountain peaks','An ascent — the climb of CACS from founding to today.'],
+      ['CACS infrastructure','buildings','cacs','Campus buildings','Classrooms, labs and the physical campus.'],
+      ['Advisory council CACS','users-three','cacs','Three figures','A council of guiding minds.'],
+      ['About Chinmaya Academy of Management','briefcase','cam','Briefcase','Management and professional life.'],
+      ['CAM Modules','stack','cam','Stacked layers','Modules build on one another, layer by layer.'],
+      ['CAM Sessions','presentation-chart','cam','Presentation board','Live sessions and lectures.'],
+    ];
+    // [main, accent, vivid1, vivid2, chinmaya1, chinmaya2]
+    const R2 = [
+      ['path','sun','#7fd3ff','#2e8bd8','#ffb35c','#d9661f'],
+      ['books','gear','#2fd6a8','#0f7f78','#e88a3a','#a2401c'],
+      ['bank','handshake','#ffd86b','#f0a417','#f2c14e','#c47a12'],
+      ['book-open-text','smiley','#ff8aa0','#e8365d','#ef7a52','#b8322a'],
+      ['chalkboard-teacher','users-three','#b48cff','#6a3fd1','#c9773a','#7a2e1c'],
+      ['hand-coins','graduation-cap','#8fd8ff','#2f86e0','#e9a640','#a8601a'],
+      ['hand-heart','first-aid','#6fdc8c','#1f9a4a','#8fb35a','#3f7a2e'],
+      ['trophy','star','#3b5bc4','#13205e','#d49a2a','#7a3a12'],
+      ['graduation-cap','certificate','#2ec4a8','#0e6e6a','#c9773a','#6e2a18'],
+      ['flame','sparkle','#9a5bff','#43188f','#f4a23a','#b23a1a'],
+      ['users-three','plant','#56c2ff','#1167c9','#f0b24a','#c05a18'],
+      ['monitor-play','bank','#ff9f5a','#e2561e','#e9874a','#9a3416'],
+      ['mountains','flag','#ff7a7a','#c8243a','#d8564a','#8a1e22'],
+      ['buildings','student','#ff9fc8','#d03a86','#c9483e','#7a1c24'],
+      ['users-three','chats-circle','#f07070','#9e1c3a','#b8403a','#6a1820'],
+      ['briefcase','info','#6ee0b8','#0f8a6a','#7fb07a','#2f6a44'],
+      ['stack','puzzle-piece','#7ed0a0','#1a7a52','#6fa070','#2a5e3a'],
+      ['presentation-chart','microphone','#5ad0c8','#0f7a86','#5f9a78','#244e3a'],
+    ];
+    const R3 = [
+      ['Motorway','Sunrise over mountains'],['Books','Gear'],['Classical building','Handshake'],['Child*','Open book'],
+      ['Teacher*','Memo'],['Money bag','Seedling'],['Camping','Red heart'],['Trophy','Glowing star'],
+      ['Graduation cap','Sports medal'],['Diya lamp','Fireworks'],['Sunrise','Seedling'],['Clapper board','Classical building'],
+      ['Snow-capped mountain','Triangular flag'],['School','Building construction'],['Busts in silhouette','Speech balloon'],['Office building','Briefcase'],
+      ['Puzzle piece','Card index dividers'],['Studio microphone','Chart increasing'],
+    ];
+    const B = 'https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/';
+    const url = (n, style) => {
+      const tone = n.endsWith('*'); const name = n.replace('*', '');
+      const f = name.toLowerCase().replace(/\s+/g, '_');
+      const dir = style === '3d' ? '3D' : 'Color';
+      const file = style === '3d' ? `${f}_3d${tone ? '_default' : ''}.png` : `${f}_color${tone ? '_default' : ''}.svg`;
+      return B + encodeURIComponent(name) + '/' + (tone ? 'Default/' : '') + dir + '/' + file;
+    };
+    const icons = raw.map(([title, ic, g, symbol, why], k) => { const [ic2, acc, v1, v2, c1, c2] = R2[k]; const [m, a] = R3[k]; return { no: String(k + 1).padStart(2, '0'), title, ic, symbol, why, ic2, acc, v1, v2, c1, c2, main3d: url(m, '3d'), acc3d: url(a, '3d'), mainFlat: url(m, 'flat'), accFlat: url(a, 'flat'), ...G[g] }; });
+    const C = n => './icons/' + n + '.png';
+    const R4 = [
+      ['Journey of CVs', { crop: C('journey') }],
+      ['Resources', { crop: C('resources') }],
+      ['Ed Cell and Govt', { crop: C('edcell') }],
+      ['Children Programs', { crop: C('children') }],
+      ['Training for Staff', { crop: C('staff') }],
+      ['Scholarship and CSR', { crop: C('scholarship') }],
+      ['Chinmaya Seva Camps', { crop: C('seva') }],
+      ['Chinmaya Awards', { crop: C('awards') }],
+      ['Alumni Achievements', { crop: C('alumni') }],
+      ['Festivals', { crop: C('festivals') }],
+      ['Chinmaya Vision Program', { crop: C('cvp') }],
+      ['Video on Ed Cell', { crop: C('edcell'), play: true, isNew: true }],
+      ['Journey of CACS', { m: 'Snow-capped mountain', a: 'Triangular flag', v1: '#ffc06a', v2: '#ef6a1f' }],
+      ['CACS Infrastructure', { m: 'School', a: 'Building construction', v1: '#6fd8ff', v2: '#1a6fd6' }],
+      ['Advisory Council CACS', { m: 'Busts in silhouette', a: 'Speech balloon', v1: '#ff8c8c', v2: '#d42f4c' }],
+      ['About Chinmaya Academy of Management', { m: 'Office building', a: 'Briefcase', v1: '#6ee39a', v2: '#178a4c' }],
+      ['CAM Modules', { m: 'Card index dividers', a: 'Puzzle piece', v1: '#ff9ad6', v2: '#b92f8a' }],
+      ['CAM Sessions', { m: 'Studio microphone', a: 'Chart increasing', v1: '#8a9bff', v2: '#3340c4' }],
+    ];
+    const icons4 = R4.map(([title, o]) => ({ title, crop: o.crop || null, play: !!o.play, isNew: !!(o.isNew || o.m), main: o.m ? url(o.m, 'flat') : null, acc: o.a ? url(o.a, 'flat') : null, v1: o.v1 || '#eee', v2: o.v2 || '#ddd' }));
+    const P = { S: 'oklch(0.72 0.17 55)', I: 'oklch(0.36 0.12 270)', M: 'oklch(0.84 0.15 85)', K: 'oklch(0.55 0.19 25)', T: 'oklch(0.52 0.10 200)', C: '#f3ead8', D: '#2e2822' };
+    const light = { S: 1, M: 1, C: 1 }, ink = '#1f1b16', cream = '#f7f0e2';
+    const SH = {
+      q: { sr: 0, st: 0, sw: 210, sh: 210, rad: '0 0 0 210px', gs: 96 },
+      c: { sr: 26, st: 22, sw: 170, sh: 170, rad: '50%', gs: 92 },
+      h: { sr: 26, st: 0, sw: 210, sh: 112, rad: '0 0 105px 105px', gs: 80 },
+      s: { sr: 44, st: 36, sw: 136, sh: 136, rad: '10px', gs: 84, rot: 45 },
+    };
+    const glyphs5 = ['path','books','bank','balloon','chalkboard-teacher','hand-coins','hand-heart','trophy','graduation-cap','flame','eye','monitor-play','mountains','buildings','users-three','briefcase','stack','presentation-chart'];
+    const combo = ['CSq','IMc','MIh','KMc','TCs','CKq','SCc','DMh','CTs','ISc','MKq','KCh','TMq','CIc','SIs','DSc','MTh','ICq'];
+    const stick = ['I','K','T','S','D','K','T','I','S','K','I','T','S','D','K','T','I','S'];
+    const tilts = [-4, 3, -2, 5, -3, 2];
+    const icons5 = raw.map(([title], k) => {
+      const [b, s, t] = combo[k]; const g = SH[t];
+      return { no: String(k + 1).padStart(2, '0'), title, ic: glyphs5[k], bg: P[b], shape: P[s], glyph: light[s] ? ink : cream, label: light[b] ? ink : cream, rot: g.rot || 0, ...g,
+        sticker: P[stick[k]], tilt: tilts[k % 6], ntilt: -tilts[k % 6] / 2 };
+    });
+    const photos = ['Archive photo — an early Vidyalaya','Library or teaching materials','Meeting with education officials','Children in a class activity','Teachers at a training workshop','Scholarship handover','Seva camp volunteers','Award ceremony on stage','Alumni portrait or graduation','Festival assembly / diyas','CVP session with students','Still from the Ed Cell video','CACS archive photo','CACS campus building','Advisory council group photo','CAM building or classroom','Students with module workbooks','CAM lecture in session'];
+    const PH = {
+      1: ['Chinmaya Vidyalaya, Pallavur.JPG', 'Me haridas'],
+      2: ["Children's reading in Public Library 05.jpg", 'Ngostary2k'],
+      4: ['Tamil Nadu school kids.jpg', 'Hand in Hand India'],
+      5: ['ICT training for blind teachers.jpg', 'Ivanjoseplavila'],
+      6: ['Singing Skylarks Volunteer making donations for Education Sponsor in Karur.JPG', 'Wikimedia Commons contributor'],
+      7: ['INS Eksila medical-cum-nutritional camp in 2015 (1).jpg', 'Indian Navy'],
+      8: ['GRADUATION AWARD CEREMONY 2012 (16).jpg', 'Anilammath'],
+      9: ['Graduation Ceremony at JMI.jpg', 'Wikimedia Commons contributor'],
+      10: ['Diya set in a rangoli.jpg', 'siddarth varanasi'],
+      11: ['A Classroom in a Government Primary school in Kerala.jpg', 'Ramjchandran'],
+      18: ['Students inside of a classroom of a local college in Howrah district of West Bengal, India.jpg', 'Billjones94'],
+    };
+    const enc = f => encodeURIComponent(f.replace(/ /g, '_'));
+    const icons6 = icons.map((x, k) => { const p = PH[k + 1]; return { ...x, ic: glyphs5[k], photo: photos[k], src: p ? 'https://commons.wikimedia.org/wiki/Special:FilePath/' + enc(p[0]) + '?width=900' : null }; });
+    const credits6 = Object.entries(PH).map(([n, [file, author]]) => ({ no: String(n).padStart(2, '0'), title: raw[n - 1][0], file, author, page: 'https://commons.wikimedia.org/wiki/File:' + enc(file) }));
+    return { icons, icons4, icons5, icons6, cv6: icons6.slice(0, 12), cacs6: icons6.slice(12, 15), cam6: icons6.slice(15), credits6, groups: Object.values(G) };
+  }
+}
+</script>
+</body>
+</html>

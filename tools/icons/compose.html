@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+  Renders one 4a topic disc (200x200 CSS px) so tools/build-icons.sh can screenshot it
+  at 2x into assets/icons/NN.webp. Recreates the "4a" markup from
+  design/Kiosk Icon Explorations.dc.html exactly; the disc's outer shadow is left to the
+  app's CSS so the baked image stays a clean circle.
+  Usage: compose.html?n=13
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; background: transparent; }
+  .disc { width: 200px; height: 200px; border-radius: 50%; position: relative; overflow: hidden; }
+  .crop { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .shine { position: absolute; inset: 0; border-radius: 50%;
+           background: radial-gradient(circle at 30% 22%, rgba(255,255,255,.35), rgba(255,255,255,0) 55%); }
+  .main { position: absolute; left: 30px; top: 26px; width: 132px; height: 132px; object-fit: contain;
+          filter: drop-shadow(0 6px 8px rgba(10,20,70,.3)); }
+  .acc { position: absolute; right: 20px; bottom: 22px; width: 72px; height: 72px; object-fit: contain;
+         filter: drop-shadow(0 4px 6px rgba(10,20,70,.35)); }
+  .play { position: absolute; right: 22px; bottom: 22px; width: 64px; height: 64px; box-sizing: border-box;
+          border-radius: 50%; background: #e8322c; border: 4px solid #fff; display: flex;
+          align-items: center; justify-content: center; box-shadow: 0 6px 12px rgba(0,0,0,.3); }
+  .play::after { content: ""; width: 0; height: 0; margin-left: 5px; border-left: 20px solid #fff;
+                 border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+</style>
+</head>
+<body>
+<script>
+  const C = n => '../../design/crops/' + n + '.png';
+  const F = n => '../../design/fluent/' + n + '.svg';
+  // Same order and values as R4 in the 4a design.
+  const R4 = {
+    1:  { crop: C('journey') },
+    2:  { crop: C('resources') },
+    3:  { crop: C('edcell') },
+    4:  { crop: C('children') },
+    5:  { crop: C('staff') },
+    6:  { crop: C('scholarship') },
+    7:  { crop: C('seva') },
+    8:  { crop: C('awards') },
+    9:  { crop: C('alumni') },
+    10: { crop: C('festivals') },
+    11: { crop: C('cvp') },
+    12: { crop: C('edcell'), play: true },
+    13: { m: F('snow-capped_mountain'), a: F('triangular_flag'), v1: '#ffc06a', v2: '#ef6a1f' },
+    14: { m: F('school'), a: F('building_construction'), v1: '#6fd8ff', v2: '#1a6fd6' },
+    15: { m: F('busts_in_silhouette'), a: F('speech_balloon'), v1: '#ff8c8c', v2: '#d42f4c' },
+    16: { m: F('office_building'), a: F('briefcase'), v1: '#6ee39a', v2: '#178a4c' },
+    17: { m: F('card_index_dividers'), a: F('puzzle_piece'), v1: '#ff9ad6', v2: '#b92f8a' },
+    18: { m: F('studio_microphone'), a: F('chart_increasing'), v1: '#8a9bff', v2: '#3340c4' },
+  };
+  const o = R4[new URLSearchParams(location.search).get('n')];
+  const disc = document.createElement('div');
+  disc.className = 'disc';
+  disc.style.background = `linear-gradient(160deg, ${o.v1 || '#eee'}, ${o.v2 || '#ddd'})`;
+  let html = '';
+  if (o.crop) html += `<img class="crop" src="${o.crop}">`;
+  if (o.m) html += `<div class="shine"></div><img class="main" src="${o.m}"><img class="acc" src="${o.a}">`;
+  if (o.play) html += `<div class="play"></div>`;
+  disc.innerHTML = html;
+  document.body.appendChild(disc);
+</script>
+</body>
+</html>
