@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!-- Printable technician sheet (A4). For the screen vendor's technician or any technical helper. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CIRS Video Kiosk – Technician Sheet</title>
+<link rel="stylesheet" href="../css/font.css">
+<style>
+  @page { size: A4; margin: 11mm; }
+  :root { --navy: #1b2a78; --slate: #4a5578; --orange: #f08a1c; --line: #e4ded3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Baloo 2', sans-serif; color: var(--navy); font-size: 10.5pt; line-height: 1.35; }
+  .eyebrow { font-weight: 700; font-size: 9.5pt; letter-spacing: .12em; color: var(--slate); }
+  h1 { margin: 0 0 2mm; font-weight: 800; font-size: 24pt; line-height: 1; }
+  h1 span { color: var(--orange); }
+  h2 { margin: 0 0 1.5mm; font-weight: 800; font-size: 13pt; line-height: 1.15; }
+  h2 em { font-style: normal; color: var(--orange); }
+  section { padding: 3mm 4mm; margin: 0 0 3mm; border: 1.5px solid var(--line); border-radius: 4mm; break-inside: avoid; }
+  p { margin: 0 0 1.5mm; }
+  ol, ul { margin: 0; padding-left: 5mm; }
+  li { margin: 0 0 .8mm; }
+  code { font-family: ui-monospace, Consolas, monospace; font-size: 9.5pt; background: #f4efe6; padding: 0 1mm; border-radius: 1mm; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3mm; }
+  .lead { color: var(--slate); font-weight: 500; margin-bottom: 3mm; }
+</style>
+</head>
+<body>
+  <div class="eyebrow">CIRS BOOTH · CHINMAYA AMRIT MAHOTSAV</div>
+  <h1>Video kiosk <span>technician sheet</span></h1>
+  <p class="lead">The kiosk is a full-screen web page that plays 18 videos. Use the first option that works on this screen. The USB pen drive contains everything: the app, the videos, the showreel and these sheets.</p>
+
+  <section>
+    <h2><em>A</em> Android with Chrome (preferred)</h2>
+    <ol>
+      <li>Open Chrome and go to the kiosk link: <code id="url">https://cirs-booth.pages.dev/</code></li>
+      <li>Tap <b>Download videos</b> (about 1.3 GB). No Wi-Fi? Open the link once on a phone hotspot, then tap <b>Load from USB stick</b> → pen drive → <code>CIRS-KIOSK/videos/hd</code> → ⋮ <b>Select all</b> → <b>Open</b>.</li>
+      <li>When it says all 18 are saved, tap <b>Add to Home screen</b>, then <b>Start</b>.</li>
+      <li><b>Android settings:</b> set the display sleep timeout to the maximum (or Developer options → <i>Stay awake</i>), lock landscape, set media volume, and turn on Do Not Disturb. Turn off the panel's own power-saving / OSD sleep timer.</li>
+      <li><b>Optional lock:</b> Settings → Security → <i>App pinning</i>, then pin Chrome or the CIRS Videos app.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><em>B</em> Android without Chrome, or to lock the screen: Fully Kiosk Browser</h2>
+    <ol>
+      <li>Install <b>Fully Kiosk Browser</b> from the Play Store, or the APK from fully-kiosk.com.</li>
+      <li><b>Start URL:</b> the kiosk link above. Web Content Settings: <i>Autoplay videos</i> ON, JavaScript ON. Web Browsing Settings: <i>Pull to refresh</i> OFF.</li>
+      <li><b>Device Management:</b> <i>Keep screen on</i> ON, <i>Launch on boot</i> ON. Kiosk Mode needs a PLUS licence; without it, use App pinning.</li>
+      <li>Then follow steps 2–3 of option A inside Fully Kiosk.</li>
+    </ol>
+  </section>
+
+  <div class="grid">
+    <section>
+      <h2><em>C/D</em> Windows PC or laptop</h2>
+      <ol>
+        <li>Copy <code>CIRS-KIOSK</code> from the pen drive to <code>C:\CIRS-KIOSK</code>.</li>
+        <li>Double-click <code>START-KIOSK.bat</code>. It opens full screen and restarts the browser if it closes. Stop it with <code>STOP-KIOSK.bat</code>.</li>
+        <li>To start automatically at power-on, run <code>INSTALL-AUTOSTART.bat</code>. This also disables sleep.</li>
+        <li><b>Laptop + touch panel:</b> connect HDMI <b>and</b> the USB touch cable. Press <b>Win+P</b> → <i>Second screen only</i>. If touches land on the wrong display: Control Panel → <i>Tablet PC Settings</i> → <i>Setup</i> → <i>Touch input</i>, then tap the panel.</li>
+      </ol>
+    </section>
+    <section>
+      <h2><em>F</em> Touch not working: showreel</h2>
+      <p>Play <code>CIRS-Showreel.mp4</code> (pen drive root) in the panel's or TV's media player and set <b>Repeat / Loop</b>. All 18 videos play with title cards, about 64 minutes.</p>
+      <h2 style="margin-top:3mm"><em>G</em> Visitors' phones</h2>
+      <p>The QR standee opens <code>…/?visitor</code>: the same topics, streamed to the phone.</p>
+    </section>
+  </div>
+
+  <section>
+    <h2>Staff screen (status, self-test, fixes)</h2>
+    <p>Hold <b>“Keep Smiling”</b> (top right) for 5 seconds, or press <b>Ctrl+Shift+S</b> on a keyboard. PIN <b>2026</b>.</p>
+    <ul>
+      <li><b>Run self-test:</b> plays 1 second of every video and shows ✓/✗ for each one.</li>
+      <li><b>Video quality → Lite:</b> use this if videos stutter on a slow screen. It needs the Lite copies, which are on the pen drive in <code>videos/lite</code>.</li>
+      <li><b>Mode → Loop only:</b> plays the videos one after another and ignores touches. Use it if touch is unreliable.</li>
+      <li><b>Volume</b>, <b>Download / repair videos</b>, <b>Load from USB stick</b>, <b>Check for updates</b>, <b>Restart app</b>.</li>
+      <li>Send a photo of this screen to the developer. It shows the device, storage and which videos are saved.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Behaviour (normal)</h2>
+    <ul>
+      <li><b>When nobody touches the screen for 90 seconds:</b> a silent showreel starts. Any touch returns to the topics.</li>
+      <li><b>When a video is paused:</b> it returns to the topics after 45 seconds.</li>
+      <li><b>When a video can't load:</b> after about 8 seconds, it shows a message and goes back.</li>
+      <li><b>Every few hours, when idle:</b> the page refreshes itself.</li>
+    </ul>
+  </section>
+
+  <script>
+    var link = new URLSearchParams(location.search).get('url');
+    if (link) document.getElementById('url').textContent = link;
+  </script>
+</body>
+</html>
