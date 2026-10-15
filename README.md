@@ -44,7 +44,13 @@ node tools/serve.mjs             # local server with byte ranges: http://localho
 node tools/test/e2e.mjs file|hosted|visitor|extras|soak N   # end-to-end tests in headless Chrome
 ```
 
+## Preview link (GitHub Pages, 720p videos)
+- Team review: https://me-shivamo.github.io/cirs/?demo
+- Full kiosk setup test on a tablet: https://me-shivamo.github.io/cirs/
+- Update it: `tools/build-site.sh --lite-only`, then push `dist/site` to the `gh-pages` branch.
+
 ## Useful URLs and gestures
+- `?demo`: kiosk look without the setup screen or forced full screen (team preview)
 - `?visitor`: phone layout, streams the Lite videos (for the QR standee)
 - `?nofs`: don't enter full screen (desk testing)
 - `?soak=1`: plays random topics for hours (memory/stability test)
