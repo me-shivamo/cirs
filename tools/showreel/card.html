@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- 1920x1080 title card shown before each topic in CIRS-Showreel.mp4 (design 4a style). Usage: card.html?n=05 -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../css/font.css">
+<style>
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#fbfaf7;font-family:'Baloo 2',sans-serif}
+.card{width:1920px;height:1080px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:44px}
+.eyebrow{font-weight:700;font-size:32px;letter-spacing:.12em;color:#4a5578}
+img{width:420px;height:420px;border-radius:50%;box-shadow:0 30px 50px -30px rgba(20,30,90,.6)}
+h1{margin:0;font-weight:800;font-size:96px;line-height:1.05;color:#1b2a78;text-align:center;max-width:1500px;text-wrap:balance}
+.no{font-weight:700;font-size:36px;color:#f08a1c}
+</style></head>
+<body><div class="card">
+  <div class="eyebrow" id="eyebrow"></div>
+  <img id="icon" alt="">
+  <h1 id="title"></h1>
+  <div class="no" id="no"></div>
+</div>
+<script src="../../js/config.js"></script>
+<script>
+  var cfg = self.KIOSK_CONFIG, n = new URLSearchParams(location.search).get('n');
+  var t = cfg.topics.filter(function (x) { return x.n === n; })[0];
+  document.getElementById('eyebrow').textContent = cfg.eyebrow;
+  document.getElementById('icon').src = '../../assets/icons/' + n + '.webp';
+  document.getElementById('title').textContent = t.title;
+  document.getElementById('no').textContent = Number(n) + ' of ' + cfg.topics.length;
+</script></body></html>
