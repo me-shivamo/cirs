@@ -65,7 +65,8 @@
     return (cfg.remoteBase || 'videos/') + q + '/' + t.file;              // direct streaming
   }
   function pickQuality(t) {
-    if (cfg.liteOnly) return 'lite';
+    // Lite-only host: still use HD copies if they were loaded from the USB stick.
+    if (cfg.liteOnly) return offlineHas(t, 'hd') ? 'hd' : 'lite';
     if (settings.quality === 'hd' || settings.quality === 'lite') return settings.quality;
     if (settings.preferLite && offlineHas(t, 'lite')) return 'lite';
     if (offlineHas(t, 'hd')) return 'hd';
