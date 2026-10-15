@@ -1,0 +1,10 @@
+# Large media: kept in Google Drive / R2 / USB sticks, never in git
+videos/
+dist/
+*.mp4
+
+# Local tooling
+node_modules/
+.DS_Store
+Thumbs.db
+tools/test/out/
