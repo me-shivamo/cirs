@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<!-- Home-screen icon: 4a-style orange disc with a play symbol, full-bleed for maskable icons. -->
+<html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:#fbfaf7}
+.wrap{width:512px;height:512px;display:flex;align-items:center;justify-content:center;background:#fbfaf7}
+.disc{width:340px;height:340px;border-radius:50%;position:relative;background:linear-gradient(160deg,#ffc06a,#ef6a1f);
+  box-shadow:0 22px 36px -22px rgba(20,30,90,.6);display:flex;align-items:center;justify-content:center}
+.disc::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.4),rgba(255,255,255,0) 55%)}
+.play{width:0;height:0;margin-left:26px;border-left:110px solid #fff;border-top:66px solid transparent;border-bottom:66px solid transparent;
+  filter:drop-shadow(0 8px 10px rgba(10,20,70,.3))}
+</style></head><body><div class="wrap"><div class="disc"><div class="play"></div></div></div></body></html>
