@@ -39,7 +39,11 @@
     navigator.serviceWorker.addEventListener('controllerchange', function () {
       if (reloadOnSwitch) location.reload();
     });
-    return navigator.serviceWorker.register('sw.js')
+    // A new version was published: reload when nobody is using the screen (see app.js).
+    navigator.serviceWorker.addEventListener('message', function (e) {
+      if (e.data === 'kiosk-updated' && window.Kiosk) window.Kiosk.updateReady();
+    });
+    return navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' })
       .then(function (r) { reg = r; })
       .catch(function (e) { console.warn('Service worker not available:', e); })
       .then(refreshIndex);

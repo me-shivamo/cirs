@@ -1,9 +1,12 @@
-/* Service worker: keeps the hosted kiosk working with no internet.
-   - App files are cached at install (versioned; bump VERSION on every deploy).
+/* Service worker: keeps the hosted kiosk working with no internet, and up to date when online.
+   - App code (page, JS, CSS) is fetched fresh whenever there is internet; the saved copy is
+     used only offline. Icons and posters come from the saved copy (refreshed per version).
+   - A new version takes over at once. Open previews (?demo, ?visitor) reload immediately;
+     kiosk screens are told to reload themselves when idle on the home screen.
    - Videos saved by the setup screen live in the 'kiosk-videos' cache and are served with
      byte ranges (206), which the browser's video player needs to start and seek.
    - A video that is not saved streams from the network instead. */
-var VERSION = '20261017-0619';
+var VERSION = '20261017-072652';
 var SHELL_CACHE = 'kiosk-shell-' + VERSION;
 var VIDEO_CACHE = 'kiosk-videos';
 
@@ -20,16 +23,34 @@ var SHELL = [
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(SHELL_CACHE).then(function (cache) {
     return cache.addAll(SHELL.map(function (u) { return new Request(u, { cache: 'reload' }); }));
-  }));
+  }).then(function () { return self.skipWaiting(); }));
 });
 
 self.addEventListener('activate', function (e) {
   e.waitUntil(caches.keys().then(function (keys) {
-    return Promise.all(keys.filter(function (k) {
-      return k.indexOf('kiosk-shell-') === 0 && k !== SHELL_CACHE;
-    }).map(function (k) { return caches.delete(k); }));
-  }).then(function () { return self.clients.claim(); }));
+    var old = keys.filter(function (k) { return k.indexOf('kiosk-shell-') === 0 && k !== SHELL_CACHE; });
+    return Promise.all(old.map(function (k) { return caches.delete(k); })).then(function () {
+      return self.clients.claim();
+    }).then(function () {
+      if (old.length) return refreshOpenPages(); // an update, not the first install
+    });
+  }));
 });
+
+// Show the new version on pages that are already open. The reload is started but NOT awaited:
+// its request is handled by this worker only once activation finishes, so waiting would deadlock.
+function refreshOpenPages() {
+  return self.clients.matchAll({ type: 'window' }).then(function (list) {
+    list.forEach(function (client) {
+      var u = new URL(client.url);
+      if (u.searchParams.has('demo') || u.searchParams.has('visitor')) {
+        client.navigate(client.url).catch(function () {});
+      } else {
+        client.postMessage('kiosk-updated'); // kiosk: reloads itself when nobody is using it
+      }
+    });
+  });
+}
 
 self.addEventListener('message', function (e) {
   if (e.data === 'skipWaiting') self.skipWaiting();
@@ -47,14 +68,25 @@ self.addEventListener('fetch', function (e) {
 });
 
 function serveShell(req) {
+  var url = new URL(req.url);
+  var nav = req.mode === 'navigate';
+  var code = nav || /\.(html|js|css|webmanifest)$/.test(url.pathname);
   return caches.open(SHELL_CACHE).then(function (cache) {
-    var nav = req.mode === 'navigate';
-    return cache.match(nav ? 'index.html' : req, { ignoreSearch: true }).then(function (hit) {
-      if (hit) return hit;
-      return fetch(req).catch(function () {
-        return nav ? cache.match('index.html') : Response.error();
-      });
+    var key = nav ? 'index.html' : req;
+    var saved = function () { return cache.match(key, { ignoreSearch: true }); };
+    if (!code) {
+      return saved().then(function (hit) { return hit || fetch(req); });
+    }
+    // App code: network first (bypassing the browser cache), saved copy if offline or slow.
+    var fresh = fetch(url.href, { cache: 'no-cache', credentials: 'same-origin' }).then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      cache.put(key, res.clone());
+      return res;
     });
+    var slow = new Promise(function (_, reject) { setTimeout(reject, 4000); });
+    return Promise.race([fresh, slow]).catch(function () {
+      return saved().then(function (hit) { return hit || fresh; });
+    }).catch(function () { return Response.error(); });
   });
 }
 
