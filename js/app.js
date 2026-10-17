@@ -392,17 +392,33 @@
     if (state !== 'home') return;
     var tiles = Array.prototype.slice.call(grid.children);
     var i = tiles.indexOf(document.activeElement);
-    var cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
-    var move = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: cols, ArrowUp: -cols }[e.key];
-    if (move) {
+    if (/^Arrow(Up|Down|Left|Right)$/.test(e.key)) {
       e.preventDefault();
-      var next = i < 0 ? 0 : Math.max(0, Math.min(tiles.length - 1, i + move));
-      tiles[next].focus();
+      var next = i < 0 ? tiles[0] : neighbour(tiles, tiles[i], e.key);
+      if (next) next.focus();
     } else if ((e.key === 'Enter' || e.key === ' ') && i >= 0) {
       e.preventDefault();
       openTopic(tiles[i].dataset.n);
     }
   });
+
+  // The tile in the arrow's direction, by position on screen (rows are staggered 7-6-6).
+  // Left/right past the end of a row continue in reading order.
+  function neighbour(tiles, from, key) {
+    var r = from.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var horizontal = key === 'ArrowLeft' || key === 'ArrowRight';
+    var best = null, bestScore = Infinity;
+    tiles.forEach(function (t) {
+      var q = t.getBoundingClientRect(), dx = q.left + q.width / 2 - cx, dy = q.top + q.height / 2 - cy;
+      var sameRow = Math.abs(dy) < r.height / 2;
+      var ahead = key === 'ArrowRight' ? sameRow && dx > 1 : key === 'ArrowLeft' ? sameRow && dx < -1 :
+        key === 'ArrowDown' ? dy > r.height / 2 : dy < -r.height / 2;
+      var score = horizontal ? Math.abs(dx) : Math.abs(dy) * 4 + Math.abs(dx);
+      if (ahead && score < bestScore) { best = t; bestScore = score; }
+    });
+    if (!best && horizontal) best = tiles[tiles.indexOf(from) + (key === 'ArrowRight' ? 1 : -1)] || null;
+    return best;
+  }
 
   // Every few seconds: start the showreel when idle, and refresh the page now and then
   // (only when nobody is using it) to keep long days fresh.

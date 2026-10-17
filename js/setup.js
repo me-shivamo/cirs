@@ -1,5 +1,5 @@
 /* Setup screen (hosted link only): save the videos on this screen, then Start.
-   Shown automatically until all 18 videos are saved. Big buttons, plain words. */
+   Shown automatically until all videos are saved. Big buttons, plain words. */
 (function () {
   'use strict';
 
@@ -23,6 +23,7 @@
     var savedHd = Offline.countFresh('hd'), savedLite = Offline.countFresh('lite');
     var saved = Math.max(savedHd, savedLite);
     var status = $('setupStatus');
+    $('setupTitle').textContent = 'Save the ' + total() + ' videos';
     if (q) {
       status.textContent = '✓ All ' + total() + ' videos are saved. This screen works without internet.';
       status.className = 'status ok';
