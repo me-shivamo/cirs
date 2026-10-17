@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Printable A4 standee: visitors scan to watch the 18 videos on their own phones (?visitor link). -->
+<!-- Printable A4 standee: visitors scan to watch the 19 videos on their own phones (?visitor link). -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -16,8 +16,8 @@
   .qr { width: 90mm; height: 90mm; padding: 6mm; background: #fff; border-radius: 8mm; box-shadow: 0 10mm 16mm -10mm rgba(20,30,90,.45); }
   .qr svg { width: 100%; height: 100%; }
   .url { font-weight: 700; font-size: 15pt; color: #4a5578; }
-  .icons { display: grid; grid-template-columns: repeat(9, 1fr); gap: 3mm; width: 100%; margin-top: auto; }
-  .icons img { width: 100%; border-radius: 50%; }
+  .icons { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.6mm; width: 100%; margin-top: auto; }
+  .icons img { width: 15mm; height: 15mm; border-radius: 50%; }
   p { margin: 0; font-weight: 500; font-size: 15pt; color: #4a5578; }
 </style>
 </head>
@@ -25,7 +25,7 @@
 <div class="page">
   <div class="eyebrow">CIRS</div>
   <h1>Watch on your phone</h1>
-  <div class="tag">18 short videos · scan the code</div>
+  <div class="tag">19 short videos · scan the code</div>
   <div class="qr" id="qr"></div>
   <div class="url" id="url"></div>
   <p>Open your phone camera, point it at the code and tap the link.</p>
@@ -40,7 +40,9 @@
   qr.make();
   document.getElementById('qr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
   var html = '';
-  for (var i = 1; i <= 18; i++) html += '<img src="../assets/icons/' + String(i).padStart(2, '0') + '.webp" alt="">';
+  ['19', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18'].forEach(function (n) {
+    html += '<img src="../assets/icons/' + n + '.webp" alt="">';
+  });
   document.getElementById('icons').innerHTML = html;
 </script>
 </body>

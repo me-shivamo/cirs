@@ -2,8 +2,8 @@
 Chinmaya International Foundation - CIRS Project
 
 Touch-screen video kiosk for the CIRS booth at the **Chinmaya Amrit Mahotsav, Bharat Mandapam**.
-Two touch screens show 18 topic videos. A visitor taps a topic, the video plays full screen, and the screen returns home when it ends.
-The home screen is design **4a** from the Claude Design project "Kiosk Icon Explorations" (`design/4a-reference.png`).
+Two touch screens show 19 topic videos (CIRS first, then 18 topics, in rows of 7-6-6). A visitor taps a topic, the video plays full screen, and the screen returns home when it ends.
+The home screen is design **4a** from the Claude Design project "Kiosk Icon Explorations" (`design/4a-reference.png`), extended to 19 tiles (layout B; CIRS icon option 2 from `design/cirs-options/`).
 
 It is a plain web page (HTML/CSS/JS, no framework, no build step). The same folder runs in several ways:
 
@@ -22,7 +22,7 @@ It is a plain web page (HTML/CSS/JS, no framework, no build step). The same fold
 ```
 index.html, css/, js/          the app (js/config.js = titles, texts, timings, staff PIN)
 sw.js, manifest.webmanifest    offline support for the hosted link
-assets/icons/                  the 18 topic discs (built from design/ by tools/build-icons.sh)
+assets/icons/                  the 19 topic discs (built from design/ by tools/build-icons.sh)
 posters/                       first frame of each video (no black flash)
 videos/                        source/, hd/, lite/ (not in git; ~5 GB)
 kiosk/                         Windows START/STOP/AUTOSTART batch files
@@ -32,7 +32,7 @@ tools/                         fetch, transcode, icons, showreel, USB bundle, si
 
 ## Commands
 ```bash
-tools/fetch-videos.sh            # download the 18 videos from the CIRS Google Drive folder
+tools/fetch-videos.sh            # download the 19 videos from the CIRS Google Drive folder
 tools/fetch-videos.sh --refresh  # check whether CIRS changed any file in Drive
 tools/transcode.sh               # HD (same volume, ≤5 Mbps) + Lite 720p + posters + js/media.js
 tools/transcode.sh --check       # SSIM quality check of re-encoded HD files vs originals
@@ -57,5 +57,5 @@ node tools/test/e2e.mjs file|hosted|visitor|extras|soak N   # end-to-end tests i
 - **Staff screen:** hold "Keep Smiling" (top right) for 5 s, or press Ctrl+Shift+S. PIN is in `js/config.js` (default 2026).
 
 ## Licences
-Icons 1–11 are from the CIRS design project. Icons 13–18 use Microsoft Fluent Emoji (MIT, `design/fluent/LICENSE`).
+Icons 1–11 are from the CIRS design project. Icons 13–19 use Microsoft Fluent Emoji (MIT, `design/fluent/LICENSE`).
 The font is Baloo 2 (SIL OFL, `assets/fonts/OFL.txt`).

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build videos/CIRS-Showreel.mp4: all 18 topics back to back, each after a 3-second title card.
+# Build videos/CIRS-Showreel.mp4: all topics back to back in kiosk order, each after a 3-second title card.
 # Backup tier F: plays on any TV / panel media player from a USB stick (set it to repeat).
 # Needs videos/hd/ (run tools/transcode.sh first), Google Chrome and ffmpeg.
 set -euo pipefail
@@ -10,8 +10,12 @@ CHROME="${CHROME:-google-chrome}"
 trap 'rm -rf "$WORK"' EXIT
 
 : >"$WORK/list.txt"
-for f in "$ROOT"/videos/hd/[0-9][0-9]-*.mp4; do
-  n="$(basename "$f" | cut -c1-2)"
+# Same order as the kiosk home screen (js/config.js).
+ORDER="$(cd "$ROOT" && node -e 'globalThis.self = globalThis; require("./js/config.js");
+  console.log(self.KIOSK_CONFIG.topics.map(function (t) { return t.n + "-" + t.slug; }).join(" "))')"
+for name in $ORDER; do
+  f="$ROOT/videos/hd/$name.mp4"
+  n="${name:0:2}"
   "$CHROME" --headless=new --disable-gpu --no-sandbox --hide-scrollbars --window-size=1920,1400 \
     --allow-file-access-from-files --virtual-time-budget=3000 --user-data-dir="$WORK/profile" \
     --screenshot="$WORK/card-raw-$n.png" "file://$ROOT/tools/showreel/card.html?n=$n" >/dev/null 2>&1

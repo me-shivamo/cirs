@@ -20,8 +20,9 @@ h1{margin:0;font-weight:800;font-size:96px;line-height:1.05;color:#1b2a78;text-a
 <script>
   var cfg = self.KIOSK_CONFIG, n = new URLSearchParams(location.search).get('n');
   var t = cfg.topics.filter(function (x) { return x.n === n; })[0];
+  var pos = cfg.topics.indexOf(t) + 1;
   document.getElementById('eyebrow').textContent = cfg.eyebrow;
   document.getElementById('icon').src = '../../assets/icons/' + n + '.webp';
   document.getElementById('title').textContent = t.title;
-  document.getElementById('no').textContent = Number(n) + ' of ' + cfg.topics.length;
+  document.getElementById('no').textContent = pos + ' of ' + cfg.topics.length;
 </script></body></html>

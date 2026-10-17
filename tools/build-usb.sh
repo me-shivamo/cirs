@@ -32,7 +32,7 @@ Windows computer or laptop:
 
 Android screen with Chrome (setup page open, no Wi-Fi):
     On the setup page tap "Load from USB stick", open this pen drive,
-    go to videos > hd, select all 18 files (menu > Select all), tap Open/Select.
+    go to videos > hd, select all 19 files (menu > Select all), tap Open/Select.
 
 Touch not working / any TV with a USB port:
     Play CIRS-Showreel.mp4 in the screen's media player and set it to Repeat.

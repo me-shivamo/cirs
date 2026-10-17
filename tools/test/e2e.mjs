@@ -68,14 +68,19 @@ async function commonPlayerTests(n) {
     check('Home button returns home', true);
   });
   await step('keyboard: arrows + Enter play, Escape returns', async () => {
+    const focused = () => page.eval('document.activeElement.dataset.n');
     await page.eval('document.querySelector(".tile").focus()');
     await page.key('ArrowRight', 0, 'ArrowRight');
+    const right = await focused();
+    await page.key('ArrowDown', 0, 'ArrowDown');
+    const down = await focused();
+    await page.key('ArrowUp', 0, 'ArrowUp');
     await page.key('ArrowDown', 0, 'ArrowDown');
     await page.key('Enter', 0, 'Enter');
-    await waitPlaying('08');
+    await waitPlaying(down);
     await page.key('Escape', 0, 'Escape');
     await waitHome();
-    check('keyboard: arrows + Enter play, Escape returns', true);
+    check('keyboard: arrows + Enter play, Escape returns', right === '01' && ['07', '08'].includes(down), `right→${right}, down→${down}`);
   });
   await step('drag across a tile does not open it', async () => {
     const c = await tile('05');
@@ -104,8 +109,10 @@ async function staffTest(expectAll) {
     await page.key('S', 10, 'KeyS'); // Ctrl+Shift+S
     await page.waitFor('!document.getElementById("modal").hidden', 3000);
     for (const d of '2026') await page.clickSel(`#pinPad button[data-k="${d}"]`);
-    await page.waitFor('!document.getElementById("staff").hidden', 3000);
+    await page.waitFor('!document.getElementById("staff").hidden && document.getElementById("staffStats").children.length > 0', 5000);
+    await sleep(300); // let the status tiles settle before tapping
     await page.clickSel('#staffTest');
+    await page.waitFor('document.getElementById("staffTest").disabled', 3000);
     await page.waitFor('!document.getElementById("staffTest").disabled', 240000, 1000);
     const msg = await page.eval('document.getElementById("staffMsg").textContent');
     await page.screenshot(join(out, `${suite}-staff.png`));
@@ -117,8 +124,9 @@ async function staffTest(expectAll) {
 
 if (suite === 'file') {
   await page.goto(`file://${root}/index.html?nofs`);
-  check('18 tiles rendered', (await page.eval('document.querySelectorAll(".tile").length')) === 18);
-  check('all 18 icons loaded', (await page.eval('[...document.querySelectorAll(".disc img")].filter(i => i.naturalWidth === 400).length')) === 18);
+  check('19 tiles rendered, CIRS first', (await page.eval('[...document.querySelectorAll(".tile")].map(t => t.dataset.n).join()')) === '19,' + Array.from({ length: 18 }, (_, i) => String(i + 1).padStart(2, '0')).join());
+  check('all 19 icons loaded', (await page.eval('[...document.querySelectorAll(".disc img")].filter(i => i.naturalWidth === 400).length')) === 19);
+  check('rows of 7, 6, 6', (await page.eval(`(() => { const rows = {}; document.querySelectorAll('.tile').forEach(t => { const k = Math.round(t.getBoundingClientRect().top); rows[k] = (rows[k] || 0) + 1; }); return Object.values(rows).join('-'); })()`)) === '7-6-6');
   check('Baloo 2 font loaded', await page.eval('document.fonts.check("800 64px \'Baloo 2\'")'));
   await page.screenshot(join(out, 'file-home.png'));
   await commonPlayerTests('08');
@@ -140,14 +148,14 @@ if (suite === 'hosted') {
     await page.waitFor('!!navigator.serviceWorker.controller', 20000);
     check('service worker takes control', true);
   });
-  await step('download saves all 18 videos', async () => {
+  await step('download saves all videos', async () => {
     await page.clickSel('#setupDownload');
     await sleep(4000);
     await page.screenshot(join(out, 'hosted-downloading.png'));
     const t0 = Date.now();
     await page.waitFor('Offline.readyQuality() !== null && !Offline.isDownloading()', 15 * 60 * 1000, 2000);
     await page.screenshot(join(out, 'hosted-saved.png'));
-    check('download saves all 18 videos', true, `${await page.eval('Offline.readyQuality()')} in ${Math.round((Date.now() - t0) / 1000)} s`);
+    check('download saves all videos', true, `${await page.eval('Offline.readyQuality()')} in ${Math.round((Date.now() - t0) / 1000)} s`);
   });
   await page.clickSel('#setupStart');
   await waitHome();
@@ -157,7 +165,7 @@ if (suite === 'hosted') {
   await sleep(500);
   const off = await fetch(`http://localhost:${port}/`).then(() => false, () => true);
   check('server is switched off', off);
-  await commonPlayerTests('13');
+  await commonPlayerTests('19');
   await step('seeking inside a saved video works offline', async () => {
     await tapTile('04');
     await waitPlaying('04');
@@ -169,7 +177,7 @@ if (suite === 'hosted') {
   });
   await step('page reload works with no server', async () => {
     await page.goto(`http://localhost:${port}/?nofs`);
-    await page.waitFor('document.querySelectorAll(".tile").length === 18 && document.getElementById("setup").hidden', 10000);
+    await page.waitFor('document.querySelectorAll(".tile").length === Kiosk.topics.length && document.getElementById("setup").hidden', 10000);
     check('page reload works with no server', true);
   });
   await attractTest();
