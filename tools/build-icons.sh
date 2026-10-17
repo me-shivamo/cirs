@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bake the 18 "4a" topic discs into assets/icons/NN.webp (400x400, transparent corners).
+# Bake the 19 "4a" topic discs into assets/icons/NN.webp (400x400, transparent corners).
 # Sources: design/crops/*.png (from the Claude Design project) and design/fluent/*.svg
 # (Microsoft Fluent Emoji, MIT licence). Needs Google Chrome and ffmpeg with libwebp.
 set -euo pipefail
@@ -10,7 +10,7 @@ TMP="$(mktemp -d)"
 CHROME="${CHROME:-google-chrome}"
 mkdir -p "$OUT"
 
-for n in $(seq 1 18); do
+for n in $(seq 1 19); do
   nn="$(printf %02d "$n")"
   "$CHROME" --headless=new --disable-gpu --no-sandbox --hide-scrollbars --mute-audio \
     --allow-file-access-from-files --force-device-scale-factor=2 --window-size=600,600 \

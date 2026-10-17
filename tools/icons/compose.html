@@ -50,7 +50,12 @@
     16: { m: F('office_building'), a: F('briefcase'), v1: '#6ee39a', v2: '#178a4c' },
     17: { m: F('card_index_dividers'), a: F('puzzle_piece'), v1: '#ff9ad6', v2: '#b92f8a' },
     18: { m: F('studio_microphone'), a: F('chart_increasing'), v1: '#8a9bff', v2: '#3340c4' },
+    // CIRS (topic 19): candidate designs in the same construction as 13-18.
+    c1: { m: F('globe_showing_asia-australia'), a: F('graduation_cap'), v1: '#ffcf6b', v2: '#b3262f' },
+    c2: { m: F('classical_building'), a: F('globe_showing_asia-australia'), v1: '#ffbe5c', v2: '#e0561b' },
+    c3: { m: F('house_with_garden'), a: F('books'), v1: '#62e2c9', v2: '#0f7f86' },
   };
+  R4[19] = R4.c2; // chosen: classical building + globe, saffron
   const o = R4[new URLSearchParams(location.search).get('n')];
   const disc = document.createElement('div');
   disc.className = 'disc';
