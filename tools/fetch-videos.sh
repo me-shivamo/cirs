@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Download the 18 source videos from the public CIRS Google Drive folder.
+# Download the topic videos from the public CIRS Google Drive folder.
 #   tools/fetch-videos.sh            download missing/incomplete files (resumable)
 #   tools/fetch-videos.sh --refresh  compare tools/videos.tsv with the live folder listing
 set -euo pipefail
@@ -22,7 +22,7 @@ if [[ "${1:-}" == "--refresh" ]]; then
       status=1
     fi
   done <"$TSV"
-  [[ $status == 0 ]] && echo "All 18 files match the Drive folder."
+  [[ $status == 0 ]] && echo "All $(grep -vc '^#' "$TSV") files match the Drive folder."
   exit $status
 fi
 

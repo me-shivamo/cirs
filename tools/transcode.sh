@@ -6,7 +6,7 @@
 #   posters/NN.jpg           first frame, shown while a video starts (no black flash)
 #   js/media.js              sizes + durations, read by the app and the service worker
 #
-# Every output gets two-pass EBU R128 loudness normalisation (-16 LUFS) so all 18 play
+# Every output gets two-pass EBU R128 loudness normalisation (-16 LUFS) so all videos play
 # at the same volume, and +faststart so playback starts instantly.
 #
 #   tools/transcode.sh            build anything missing
@@ -69,22 +69,29 @@ build_one() {
   af="$(loudnorm_filter "$src"),aresample=48000"
   kbps=$(( $(probe format=bit_rate "$src") / 1000 ))
 
-  if (( kbps <= HD_COPY_MAX_KBPS )); then
+  # Frame rates above 30 (e.g. 50/60 fps) are halved: much lighter to decode on weak panels.
+  local fps vfps="" 
+  fps="$(probe stream=r_frame_rate "$src" | python3 -I -c 'import sys; n,_,d=sys.stdin.read().strip().partition("/"); print(round(float(n)/float(d or 1), 3))')"
+  if python3 -I -c "import sys; sys.exit(0 if $fps > 30.5 else 1)"; then
+    vfps="fps=$(python3 -I -c "f=$fps; print(f/2 if f/2 <= 30 else 30)"),"
+  fi
+
+  if (( kbps <= HD_COPY_MAX_KBPS )) && [[ -z "$vfps" ]]; then
     ffmpeg -hide_banner -loglevel error -y -i "$src" -map 0:v:0 -map 0:a:0 \
       -c:v copy -af "$af" -c:a aac -b:a 128k -ac 2 -movflags +faststart "$hd.tmp.mp4"
     echo "hd    $name  (video copied, ${kbps} kbps)"
   else
     ffmpeg -hide_banner -loglevel error -y -i "$src" -map 0:v:0 -map 0:a:0 \
       -c:v libx264 -preset slow -crf 21 -maxrate 5M -bufsize 10M -profile:v high -level 4.0 \
-      -pix_fmt yuv420p -g 50 -vf "scale='min(1920,iw)':-2" \
+      -pix_fmt yuv420p -g 50 -vf "${vfps}scale='min(1920,iw)':-2" \
       -af "$af" -c:a aac -b:a 128k -ac 2 -movflags +faststart "$hd.tmp.mp4"
-    echo "hd    $name  (re-encoded from ${kbps} kbps)"
+    echo "hd    $name  (re-encoded from ${kbps} kbps${vfps:+, $fps fps halved})"
   fi
   mv "$hd.tmp.mp4" "$hd"
 
   ffmpeg -hide_banner -loglevel error -y -i "$src" -map 0:v:0 -map 0:a:0 \
     -c:v libx264 -preset slow -crf 24 -maxrate 1.8M -bufsize 3.6M -profile:v main -level 3.1 \
-    -pix_fmt yuv420p -g 50 -vf "scale=-2:720" \
+    -pix_fmt yuv420p -g 50 -vf "${vfps}scale=-2:720" \
     -af "$af" -c:a aac -b:a 96k -ac 2 -movflags +faststart "$lite.tmp.mp4"
   mv "$lite.tmp.mp4" "$lite"
   echo "lite  $name"
