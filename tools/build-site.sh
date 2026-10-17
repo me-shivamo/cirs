@@ -20,7 +20,10 @@ if [[ -n "$BASE" ]]; then
   [[ "$BASE" == */ ]] || BASE="$BASE/"
   sed -i "s|^  remoteBase: '.*',|  remoteBase: '$BASE',|" "$OUT/js/config.js"
 fi
-sed -i "s|^var VERSION = '.*';|var VERSION = '$(date +%Y%m%d-%H%M)';|" "$OUT/sw.js"
+VER="$(date +%Y%m%d-%H%M%S)"
+sed -i "s|^var VERSION = '.*';|var VERSION = '$VER';|" "$OUT/sw.js"
+# Version-stamp the page's own files so browsers never mix an old cached copy with a new one.
+sed -i -E "s#(href|src)=\"((css|js)/[^\"?]+|manifest\.webmanifest)\"#\1=\"\2?v=$VER\"#g" "$OUT/index.html"
 
 # --lite-only: a self-contained preview (e.g. GitHub Pages, max 100 MB per file) with the
 # 720p copies served next to the app.

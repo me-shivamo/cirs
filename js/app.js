@@ -49,6 +49,7 @@
   var attractFails = 0;
   var attractPausedUntil = 0;
   var timers = {};
+  var updatePending = false;    // a new version is ready: reload at the next quiet moment
 
   function clearTimer(name) { if (timers[name]) { clearTimeout(timers[name]); timers[name] = null; } }
   function setTimer(name, ms, fn) {
@@ -424,6 +425,9 @@
   // (only when nobody is using it) to keep long days fresh.
   setInterval(function () {
     var idleMs = Date.now() - idleSince;
+    // New version published (online): reload once the screen has been idle on home for 20 s (or during
+    // the idle showreel), so nobody's video is cut off.
+    if (updatePending && ((state === 'home' && idleMs > 20000) || state === 'attract')) { location.reload(); return; }
     if (state === 'home' && !isVisitor && !isSoak) {
       if (settings.mode === 'loop' || (cfg.attractAfterSec > 0 && idleMs > cfg.attractAfterSec * 1000)) startAttract();
     }
@@ -464,6 +468,7 @@
     openTopic: openTopic, closePlayer: closePlayer, startAttract: startAttract, stopAttract: stopAttract,
     showScreen: showScreen, hideScreen: hideScreen, toast: toast, enterFullscreen: enterFullscreen,
     srcFor: srcFor, pickQuality: pickQuality,
+    updateReady: function () { updatePending = true; },
   };
 
   document.addEventListener('DOMContentLoaded', function () {

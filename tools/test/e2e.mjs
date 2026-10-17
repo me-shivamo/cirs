@@ -265,6 +265,52 @@ if (suite === 'extras') {
   });
 }
 
+if (suite === 'update') {
+  // Publishing a new version must reach people who opened the link before, without them
+  // refreshing. "Old" = the live preview (dist/gh-pages); "new" = a fresh build (dist/site).
+  const { execSync } = await import('node:child_process');
+  const sh = (cmd) => execSync(cmd, { cwd: root, stdio: 'pipe' }).toString();
+  const port = 8099, base = `http://localhost:${port}/dist/updtest/`;
+  const label19 = 'document.querySelector(\'.tile[data-n="19"] .label\').textContent';
+  sh('rm -rf dist/updtest && mkdir -p dist/updtest && rsync -a --exclude .git --exclude videos dist/gh-pages/ dist/updtest/');
+  sh('tools/build-site.sh --lite-only >/dev/null');
+  const server = spawn('node', [join(root, 'tools/serve.mjs'), String(port)], { stdio: 'ignore' });
+  await sleep(500);
+
+  await page.goto(base + '?demo');
+  await page.waitFor(`!!navigator.serviceWorker.controller && ${label19} === 'CIRS'`, 20000);
+  check('old version open (tile 19 = CIRS)', true);
+
+  sh('rsync -a --exclude .git --exclude videos dist/site/ dist/updtest/'); // publish the new version
+  await page.goto(base + '?demo'); // the visitor simply opens the link again
+  await step('reopening shows the new version without a manual refresh', async () => {
+    await page.waitFor(`${label19} === 'CCMTEC'`, 30000);
+    check('reopening shows the new version without a manual refresh', true);
+  });
+
+  // Later updates: the page itself is now fetched fresh whenever online.
+  sh(`sed -i "s/title: 'CCMTEC'/title: 'TEST-2'/" dist/updtest/js/config.js && sed -i "s/^var VERSION = '.*';/var VERSION = 'test-2';/" dist/updtest/sw.js`);
+  await page.goto(base + '?demo');
+  await step('next update shows on the first open', async () => {
+    await page.waitFor(`${label19} === 'TEST-2'`, 15000);
+    check('next update shows on the first open', true);
+  });
+
+  // Kiosk screen: never reloads mid-video; reloads itself once idle on home.
+  await page.goto(base);
+  await page.waitFor('!!window.Kiosk && !document.getElementById("setup").hidden', 15000);
+  await page.clickSel('#setupStart');
+  await page.waitFor(`Kiosk.state() === 'home'`, 5000);
+  sh(`sed -i "s/title: 'TEST-2'/title: 'TEST-3'/" dist/updtest/js/config.js && sed -i "s/^var VERSION = '.*';/var VERSION = 'test-3';/" dist/updtest/sw.js`);
+  await page.eval('navigator.serviceWorker.getRegistration().then(r => r.update())');
+  await step('kiosk screen picks up the update when idle', async () => {
+    await page.waitFor(`${label19} === 'TEST-3'`, 60000, 1000);
+    check('kiosk screen picks up the update when idle', true);
+  });
+  server.kill('SIGKILL');
+  sh('rm -rf dist/updtest');
+}
+
 if (suite === 'soak') {
   const minutes = Number(process.argv[3] || 10);
   await page.goto(`file://${root}/index.html?nofs&soak=1`);
