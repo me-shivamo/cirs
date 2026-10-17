@@ -22,7 +22,9 @@ self.KIOSK_CONFIG = {
   stallTimeoutSec: 8,     // a video stuck loading returns home after this long
   idleReloadHours: 4,     // refresh the page (when nobody is using it) after this many hours
 
+  // Shown in this order (rows of 7, 6, 6). `n` is the video's number in the Drive folder.
   topics: [
+    { n: '19', slug: 'cirs', title: 'CIRS' },
     { n: '01', slug: 'journey-of-cvs', title: 'Journey of CVs' },
     { n: '02', slug: 'resources', title: 'Resources' },
     { n: '03', slug: 'ed-cell-and-govt', title: 'Ed Cell and Govt' },
