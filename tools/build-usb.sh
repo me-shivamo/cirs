@@ -43,4 +43,4 @@ sed -i 's/$/\r/' "$OUT/READ-ME-FIRST.txt"
 
 du -sh "$OUT"
 echo "USB bundle ready: $OUT"
-echo "Copy the CIRS-KIOSK folder to each USB stick (exFAT or NTFS recommended; FAT32 works, files are < 4 GB)."
+echo "Copy the CIRS-KIOSK folder to each USB stick (8 GB+, exFAT or FAT32; Android screens often cannot read NTFS)."
