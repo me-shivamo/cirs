@@ -1,0 +1,28 @@
+*CIRS Touch Screens – Setup at Bharat Mandapam* 🖥️
+⏱️ About 20 minutes per screen. Do it on the setup day, one screen at a time.
+
+*Carry:* CIRS pen drive, a phone with hotspot data, the printed Quick Start card and Technician sheet.
+
+*PLAN A – Pen drive (best quality, no internet)*
+• Plug the pen drive into the screen (or into a laptop connected to the screen).
+• Open *CIRS-KIOSK* → double-click *START-KIOSK*.
+• The topics open full screen. ✅ Done in 2 minutes.
+👉 Works on Windows screens and laptops. If the screen is Android, or nothing happens, go to Plan B.
+
+*PLAN B – Link (if Plan A does not work)*
+1. Open *Chrome* on the screen and go to:
+   https://me-shivamo.github.io/cirs/
+2. Tap *Download videos* (Wi-Fi or phone hotspot, about 400 MB, 10–15 min). Wait until it says *"All 19 videos are saved"*.
+   • No internet? Tap *Load from USB stick* → pen drive → CIRS-KIOSK › videos › hd → ⋮ *Select all* → *Open*.
+3. Tap *Add to Home screen* (if shown), then *Start*. ✅
+After this it works without internet. Next time, just tap the orange *CIRS Videos* icon.
+
+*Quick check (2 min):* tap 2–3 topics. Each video plays full screen and goes back to the topics by itself.
+
+*If something goes wrong:*
+• Screen shows something else → tap the *CIRS Videos* icon.
+• Screen frozen → switch it off and on, then tap the icon.
+• Touch not working → ask the technician to play *CIRS-Showreel.mp4* from the pen drive on repeat.
+• Still stuck after 15 min → hold *"Keep Smiling"* (top right) for 5 seconds, enter PIN *2026*, and send me a photo of that screen.
+
+Preview on your phone any time: https://me-shivamo.github.io/cirs/?demo

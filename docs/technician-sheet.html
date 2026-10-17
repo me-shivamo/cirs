@@ -22,49 +22,53 @@
   code { font-family: ui-monospace, Consolas, monospace; font-size: 9.5pt; background: #f4efe6; padding: 0 1mm; border-radius: 1mm; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3mm; }
   .lead { color: var(--slate); font-weight: 500; margin-bottom: 3mm; }
+  .nw { white-space: nowrap; }
 </style>
 </head>
 <body>
   <div class="eyebrow">CIRS BOOTH · CHINMAYA AMRIT MAHOTSAV</div>
   <h1>Video kiosk <span>technician sheet</span></h1>
-  <p class="lead">The kiosk is a full-screen web page that plays 19 videos. Use the first option that works on this screen. The USB pen drive contains everything: the app, the videos, the showreel and these sheets.</p>
+  <p class="lead">The kiosk is a full-screen web page that plays 19 videos and works without internet once set up. Use the first plan that works on this screen. The pen drive (<code class="nw">CIRS-KIOSK</code> folder) contains everything: the app, the videos, the showreel and these sheets.</p>
 
   <section>
-    <h2><em>A</em> Android with Chrome (preferred)</h2>
+    <h2><em>Plan A</em> · Windows screen or laptop (pen drive, no internet)</h2>
     <ol>
-      <li>Open Chrome and go to the kiosk link: <code id="url">https://cirs-booth.pages.dev/</code></li>
-      <li>Tap <b>Download videos</b> (about 1.3 GB). No Wi-Fi? Open the link once on a phone hotspot, then tap <b>Load from USB stick</b> → pen drive → <code>CIRS-KIOSK/videos/hd</code> → ⋮ <b>Select all</b> → <b>Open</b>.</li>
-      <li>When it says all 19 are saved, tap <b>Add to Home screen</b>, then <b>Start</b>.</li>
-      <li><b>Android settings:</b> set the display sleep timeout to the maximum (or Developer options → <i>Stay awake</i>), lock landscape, set media volume, and turn on Do Not Disturb. Turn off the panel's own power-saving / OSD sleep timer.</li>
+      <li>Plug in the pen drive, open <code class="nw">CIRS-KIOSK</code>, double-click <code class="nw">START-KIOSK.bat</code>. It opens full screen and reopens the browser if someone closes it. To stop: <b>Alt+Tab</b> → <code class="nw">STOP-KIOSK.bat</code>.</li>
+      <li><b>Laptop for the whole event:</b> copy <code class="nw">CIRS-KIOSK</code> to <code class="nw">C:\CIRS-KIOSK</code> and run <code>INSTALL-AUTOSTART.bat</code> from there. The kiosk then starts at power-on, and sleep is switched off.</li>
+      <li><b>Laptop + touch panel:</b> connect HDMI <b>and</b> the USB touch cable. Press <b>Win+P</b> → <i>Second screen only</i>. If touches land on the wrong display: Control Panel → <i>Tablet PC Settings</i> → <i>Setup</i> → <i>Touch input</i>, then tap the panel.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><em>Plan B</em> · Android with Chrome (link)</h2>
+    <ol>
+      <li>Open Chrome and go to the kiosk link: <code id="url">https://me-shivamo.github.io/cirs/</code></li>
+      <li>Tap <b>Download videos</b> (720p, about 400 MB). For full HD, or with no Wi-Fi, open the link once (phone hotspot is enough), tap <b>Load from USB stick</b> → pen drive → <code class="nw">CIRS-KIOSK/videos/hd</code> → ⋮ <b>Select all</b> → <b>Open</b>.</li>
+      <li>When it says all 19 are saved, tap <b>Add to Home screen</b> (if shown), then <b>Start</b>.</li>
+      <li><b>Android settings:</b> display sleep timeout to the maximum (or Developer options → <i>Stay awake</i>), lock landscape, set media volume, Do Not Disturb on. Turn off the panel's own power-saving / OSD sleep timer.</li>
       <li><b>Optional lock:</b> Settings → Security → <i>App pinning</i>, then pin Chrome or the CIRS Videos app.</li>
     </ol>
   </section>
 
   <section>
-    <h2><em>B</em> Android without Chrome, or to lock the screen: Fully Kiosk Browser</h2>
+    <h2>Android without Chrome, or to lock the screen fully: Fully Kiosk Browser</h2>
     <ol>
       <li>Install <b>Fully Kiosk Browser</b> from the Play Store, or the APK from fully-kiosk.com.</li>
-      <li><b>Start URL:</b> the kiosk link above. Web Content Settings: <i>Autoplay videos</i> ON, JavaScript ON. Web Browsing Settings: <i>Pull to refresh</i> OFF.</li>
-      <li><b>Device Management:</b> <i>Keep screen on</i> ON, <i>Launch on boot</i> ON. Kiosk Mode needs a PLUS licence; without it, use App pinning.</li>
-      <li>Then follow steps 2–3 of option A inside Fully Kiosk.</li>
+      <li><b>Start URL:</b> the kiosk link above. Web Content Settings: <i>Autoplay videos</i> ON, JavaScript ON. Web Browsing Settings: <i>Pull to refresh</i> OFF. Device Management: <i>Keep screen on</i> ON, <i>Launch on boot</i> ON.</li>
+      <li>Then follow Plan B steps 2–3 inside Fully Kiosk. (Its Kiosk Mode needs a PLUS licence; without it, use App pinning.)</li>
     </ol>
   </section>
 
   <div class="grid">
     <section>
-      <h2><em>C/D</em> Windows PC or laptop</h2>
-      <ol>
-        <li>Copy <code>CIRS-KIOSK</code> from the pen drive to <code>C:\CIRS-KIOSK</code>.</li>
-        <li>Double-click <code>START-KIOSK.bat</code>. It opens full screen and restarts the browser if it closes. Stop it with <code>STOP-KIOSK.bat</code>.</li>
-        <li>To start automatically at power-on, run <code>INSTALL-AUTOSTART.bat</code>. This also disables sleep.</li>
-        <li><b>Laptop + touch panel:</b> connect HDMI <b>and</b> the USB touch cable. Press <b>Win+P</b> → <i>Second screen only</i>. If touches land on the wrong display: Control Panel → <i>Tablet PC Settings</i> → <i>Setup</i> → <i>Touch input</i>, then tap the panel.</li>
-      </ol>
+      <h2>Touch not working: showreel</h2>
+      <p>Play <code class="nw">CIRS-Showreel.mp4</code> (pen drive, inside <code class="nw">CIRS-KIOSK</code>) in the panel's or TV's media player and set <b>Repeat / Loop</b>. All 19 videos play with title cards, about 67 minutes.</p>
+      <h2 style="margin-top:3mm">Visitors' phones</h2>
+      <p>The QR standee opens <code>…/?visitor</code>: the same topics, streamed to the phone.</p>
     </section>
     <section>
-      <h2><em>F</em> Touch not working: showreel</h2>
-      <p>Play <code>CIRS-Showreel.mp4</code> (pen drive root) in the panel's or TV's media player and set <b>Repeat / Loop</b>. All 19 videos play with title cards, about 67 minutes.</p>
-      <h2 style="margin-top:3mm"><em>G</em> Visitors' phones</h2>
-      <p>The QR standee opens <code>…/?visitor</code>: the same topics, streamed to the phone.</p>
+      <h2>Preparing a pen drive</h2>
+      <p>Copy the whole <code class="nw">CIRS-KIOSK</code> folder (2.2 GB) onto a pen drive of 8 GB or more. Use <b>exFAT</b> or <b>FAT32</b> (Android screens often cannot read NTFS). Keep the folder name. Test once on a laptop with <code class="nw">START-KIOSK.bat</code>.</p>
     </section>
   </div>
 

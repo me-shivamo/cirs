@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 # Print the booth documents to PDF (docs/*.pdf) with headless Chrome.
-#   tools/build-docs.sh https://cirs-booth.pages.dev/     kiosk link printed on the cards/QR codes
-# Card screenshots come from docs/img/ (made by tools/test/e2e.mjs hosted, see tools/make-doc-images.sh).
+#   tools/build-docs.sh <kiosk-link> ["Helpline name"] ["+91 phone"]
+#   e.g. tools/build-docs.sh https://me-shivamo.github.io/cirs/ "Shivam" "+91 98xxxxxxx"
+# Without a name/phone the Quick Start card prints blank lines to write on.
+# Card screenshots live in docs/img/ (taken from the running app at 1920x1080).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-LINK="${1:-https://cirs-booth.pages.dev/}"
+LINK="${1:-https://me-shivamo.github.io/cirs/}"
+HELP_NAME="${2:-}"
+HELP_PHONE="${3:-}"
 [[ "$LINK" == */ ]] || LINK="$LINK/"
 CHROME="${CHROME:-google-chrome}"
 TMP="$(mktemp -d)"
@@ -18,6 +22,6 @@ print() { # html-file query out.pdf
   echo "Wrote $3"
 }
 
-print quick-start.html "url=$(enc "$LINK")" "$ROOT/docs/CIRS-Quick-Start.pdf"
+print quick-start.html "url=$(enc "$LINK")&name=$(enc "$HELP_NAME")&phone=$(enc "$HELP_PHONE")" "$ROOT/docs/CIRS-Quick-Start.pdf"
 print technician-sheet.html "url=$(enc "$LINK")" "$ROOT/docs/CIRS-Technician-Sheet.pdf"
 print qr-standee.html "url=$(enc "${LINK}?visitor")" "$ROOT/docs/CIRS-QR-Standee.pdf"

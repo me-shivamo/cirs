@@ -1,143 +1,170 @@
 <!DOCTYPE html>
 <!-- Printable Quick Start card for the CIRS booth team (2 A4 pages). Print to PDF: tools/build-docs.sh
-     Set the kiosk link and helpline below before printing. -->
+     The kiosk link comes from ?url=… (build-docs.sh sets it). Fill in the helpline before printing. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <title>CIRS Touch Screen – Quick Start</title>
 <link rel="stylesheet" href="../css/font.css">
 <style>
-  @page { size: A4; margin: 12mm; }
+  @page { size: A4; margin: 11mm; }
   :root { --navy: #1b2a78; --slate: #4a5578; --orange: #f08a1c; --bg: #fbfaf7; --line: #e4ded3; }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: 'Baloo 2', sans-serif; color: var(--navy); background: #fff; }
-  .page { width: 186mm; min-height: 270mm; page-break-after: always; display: flex; flex-direction: column; gap: 5mm; }
+  .page { width: 188mm; height: 274mm; page-break-after: always; display: flex; flex-direction: column; gap: 3.6mm; overflow: hidden; }
   .page:last-child { page-break-after: auto; }
-  .eyebrow { font-weight: 700; font-size: 11pt; letter-spacing: .12em; color: var(--slate); }
-  h1 { margin: 0; font-weight: 800; font-size: 30pt; line-height: 1; }
+  .eyebrow { font-weight: 700; font-size: 10.5pt; letter-spacing: .12em; color: var(--slate); }
+  h1 { margin: 0; font-weight: 800; font-size: 28pt; line-height: 1; }
   h1 span { color: var(--orange); }
-  .lead { margin: 0; font-size: 13pt; font-weight: 500; color: var(--slate); }
-  .step { display: flex; gap: 5mm; padding: 4.5mm 5mm; border: 2px solid var(--line); border-radius: 6mm; align-items: center; }
-  .num { flex: none; width: 15mm; height: 15mm; border-radius: 50%; background: var(--orange); color: #fff; font-weight: 800; font-size: 22pt; display: flex; align-items: center; justify-content: center; padding-top: 1mm; }
-  .step h2 { margin: 0 0 1mm; font-weight: 800; font-size: 17pt; line-height: 1.1; }
-  .step p { margin: 0; font-size: 12.5pt; line-height: 1.3; font-weight: 500; }
-  .step img.shot { flex: none; width: 62mm; border-radius: 3mm; border: 1px solid var(--line); }
-  .link { display: flex; gap: 6mm; align-items: center; padding: 5mm; border-radius: 6mm; background: var(--bg); border: 2px dashed var(--orange); }
-  .link .url { font-weight: 800; font-size: 20pt; word-break: break-all; }
-  .link .qr { flex: none; width: 34mm; height: 34mm; }
-  .link .qr img, .link .qr canvas { width: 100%; height: 100%; }
-  .tip { margin: 0; font-size: 12pt; font-weight: 600; color: var(--slate); }
-  .tip b { color: var(--navy); }
-  .problem { padding: 4mm 5mm; border-radius: 5mm; border: 2px solid var(--line); }
-  .problem h2 { margin: 0 0 1.5mm; font-weight: 800; font-size: 15pt; line-height: 1.15; }
-  .problem h2::before { content: "If  "; color: var(--orange); }
-  .problem p, .problem li { margin: 0; font-size: 12.5pt; line-height: 1.35; font-weight: 500; }
-  .problem ol { margin: 0; padding-left: 6mm; }
-  .help { margin-top: auto; padding: 5mm; border-radius: 6mm; background: var(--navy); color: #fff; }
-  .help h2 { margin: 0 0 1mm; font-weight: 800; font-size: 16pt; }
-  .help p { margin: 0; font-size: 13pt; font-weight: 500; }
-  .fill { display: inline-block; min-width: 70mm; border-bottom: 2px solid rgba(255,255,255,.6); }
+  .lead { margin: 0; font-size: 12.5pt; font-weight: 600; color: var(--slate); line-height: 1.3; }
+  .carry { margin: 0; padding: 2.4mm 4mm 1.6mm; border-radius: 3mm; background: var(--bg); font-size: 11.5pt; font-weight: 600; color: var(--slate); }
+  .carry b { color: var(--navy); }
+
+  .plan { border: 2px solid var(--line); border-radius: 5mm; padding: 3.6mm 4.5mm 3.8mm; display: flex; flex-direction: column; gap: 2.4mm; }
+  .plan.a { border-color: var(--orange); }
+  .plan-head { display: flex; align-items: baseline; gap: 3mm; flex-wrap: wrap; }
+  .tag { padding: 1.2mm 3.2mm .6mm; border-radius: 99px; background: var(--orange); color: #fff; font-weight: 800; font-size: 11pt; letter-spacing: .06em; }
+  .plan.b .tag { background: var(--navy); }
+  .plan-head h2 { margin: 0; font-weight: 800; font-size: 16pt; line-height: 1.1; }
+  .plan-head .when { font-weight: 600; font-size: 11pt; color: var(--slate); }
+  .row { display: flex; gap: 3.5mm; align-items: center; }
+  .n { flex: none; width: 9mm; height: 9mm; border-radius: 50%; background: var(--orange); color: #fff; font-weight: 800; font-size: 14pt; display: flex; align-items: center; justify-content: center; padding-top: .6mm; }
+  .plan.b .n { background: var(--navy); }
+  .row p { margin: 0; font-size: 12pt; line-height: 1.3; font-weight: 500; }
+  .row p b { font-weight: 800; }
+  .row .text { flex: 1; min-width: 0; }
+  .row img.shot { flex: none; width: 52mm; border-radius: 2mm; border: 1px solid var(--line); }
+  .note { margin: 0; font-size: 11pt; font-weight: 600; color: var(--slate); line-height: 1.3; }
+  .note b { color: var(--navy); }
+  .arrow { color: var(--orange); font-weight: 800; }
+
+  .link { display: flex; gap: 4.5mm; align-items: center; padding: 2.6mm 3.5mm; border-radius: 4mm; background: var(--bg); border: 2px dashed var(--navy); }
+  .link .qr { flex: none; width: 27mm; height: 27mm; }
+  .link .qr svg { width: 100%; height: 100%; display: block; }
+  .link .url { font-weight: 800; font-size: 17pt; line-height: 1.1; word-break: break-all; }
+
+  .box { padding: 3.2mm 4.5mm 3mm; border-radius: 4.5mm; border: 2px solid var(--line); }
+  .box h2 { margin: 0 0 1mm; font-weight: 800; font-size: 13.5pt; line-height: 1.15; }
+  .box.if h2::before { content: "If  "; color: var(--orange); }
+  .box p, .box li { margin: 0; font-size: 11.5pt; line-height: 1.32; font-weight: 500; }
+  .box ul, .box ol { margin: .6mm 0 0; padding-left: 5.5mm; }
+  .box.day { background: var(--bg); border-color: var(--bg); }
+  .help { margin-top: auto; padding: 4mm 5mm; border-radius: 5mm; background: var(--navy); color: #fff; }
+  .help h2 { margin: 0 0 1.5mm; font-weight: 800; font-size: 14pt; }
+  .help p { margin: 0 0 1mm; font-size: 12pt; font-weight: 500; }
+  .fill { display: inline-block; min-width: 75mm; border-bottom: 2px solid rgba(255,255,255,.6); }
+  .nw { white-space: nowrap; }
 </style>
 </head>
 <body>
 
+<!-- ============ PAGE 1: SET UP ============ -->
 <section class="page">
   <div>
     <div class="eyebrow">CIRS BOOTH · CHINMAYA AMRIT MAHOTSAV</div>
     <h1>Touch screen <span>Quick Start</span></h1>
   </div>
-  <p class="lead">Do these three steps once on each of the two screens, on the setup day. It takes about 20 minutes per screen.</p>
+  <p class="lead">Set up each of the two screens once, on the setup day. About 20 minutes per screen. Try Plan A first; if it does not work, use Plan B.</p>
+  <p class="carry"><b>Carry:</b> the CIRS pen drive &nbsp;·&nbsp; a phone with hotspot data &nbsp;·&nbsp; this card &nbsp;·&nbsp; the Technician sheet</p>
 
-  <div class="link">
-    <div class="qr" id="qr"></div>
-    <div>
-      <div class="eyebrow">OPEN THIS IN CHROME ON THE SCREEN</div>
-      <div class="url" id="url">cirs-booth.pages.dev</div>
-      <p class="tip">Scan the code with the screen's camera or type the address in Chrome.</p>
-    </div>
+  <div class="plan a">
+    <div class="plan-head"><span class="tag">PLAN A</span><h2>Pen drive</h2><span class="when">Windows screen or laptop · 2 minutes · no internet needed</span></div>
+    <div class="row"><div class="n">1</div><p>Plug the <b>pen drive</b> into the screen, or into the laptop connected to the screen.</p></div>
+    <div class="row"><div class="n">2</div><p>Open the <b class="nw">CIRS-KIOSK</b> folder and double-click <b class="nw">START-KIOSK</b>.</p></div>
+    <div class="row"><div class="n">3</div><p>The topics open full screen. <b>Done ✓</b> &nbsp;(To close it: press <b>Alt + Tab</b>, then double-click <b class="nw">STOP-KIOSK</b>.)</p></div>
+    <p class="note"><span class="arrow">→</span> Android screen, or nothing happens? Use <b>Plan B</b>.</p>
   </div>
 
-  <div class="step">
-    <div class="num">1</div>
-    <div>
-      <h2>Tap “Download videos”</h2>
-      <p>The screen needs Wi-Fi for this step only. Wait until it says <b>“All 19 videos are saved”</b>. Keep the screen switched on while it downloads. If the Wi-Fi drops, it carries on by itself.</p>
+  <div class="plan b">
+    <div class="plan-head"><span class="tag">PLAN B</span><h2>Link in Chrome</h2><span class="when">Android screen · 15–20 minutes</span></div>
+    <div class="link">
+      <div class="qr" id="qr"></div>
+      <div>
+        <div class="eyebrow">OPEN IN CHROME ON THE SCREEN</div>
+        <div class="url" id="url">me-shivamo.github.io/cirs</div>
+        <p class="note">Scan the code with the screen's camera, or type the address in Chrome.</p>
+      </div>
     </div>
-    <img class="shot" src="img/setup.png" alt="">
-  </div>
-
-  <div class="step">
-    <div class="num">2</div>
-    <div>
-      <h2>Tap “Add to Home screen”, then “Start”</h2>
-      <p>This puts an orange <b>CIRS Videos</b> icon on the screen's home page. Next time, just tap that icon. No internet is needed after this.</p>
+    <div class="row">
+      <div class="n">1</div>
+      <div class="text"><p>Tap <b>Download videos</b>. Needs Wi-Fi or a phone hotspot, about 400 MB, 10–15 minutes. Wait until it says <b>“All 19 videos are saved”</b>. If the Wi-Fi drops, it continues by itself.</p>
+      <p class="note" style="margin-top:1mm">No internet? Tap <b>Load from USB stick</b> → pen drive → <b class="nw">CIRS-KIOSK › videos › hd</b> → <b>⋮ Select all</b> → <b>Open</b>.</p></div>
+      <img class="shot" src="img/setup.png" alt="">
     </div>
-    <img class="shot" src="img/saved.png" alt="">
-  </div>
-
-  <div class="step">
-    <div class="num">3</div>
-    <div>
-      <h2>Check it</h2>
-      <p>Tap two or three topics. Each video plays full screen and goes back to the topics when it ends. The <b>Home</b> button goes back at any time.</p>
+    <div class="row">
+      <div class="n">2</div>
+      <div class="text"><p>Tap <b>Add to Home screen</b> (if you see it), then <b>Start</b>. An orange <b>CIRS Videos</b> icon appears on the screen's home page. No internet is needed after this.</p></div>
+      <img class="shot" src="img/saved.png" alt="">
     </div>
-    <img class="shot" src="img/home.png" alt="">
+    <div class="row">
+      <div class="n">3</div>
+      <div class="text"><p><b>Check:</b> tap 2–3 topics. Each video plays full screen and goes back to the topics by itself when it ends. <b>Home</b> goes back at any time.</p></div>
+      <img class="shot" src="img/home.png" alt="">
+    </div>
   </div>
-
-  <p class="tip"><b>Every morning:</b> switch the screen on and tap the <b>CIRS Videos</b> icon. When nobody touches it for 90 seconds, it plays the videos silently by itself. This is normal.</p>
 </section>
 
+<!-- ============ PAGE 2: EVERY DAY + PROBLEMS ============ -->
 <section class="page">
   <div>
     <div class="eyebrow">CIRS BOOTH · TOUCH SCREENS</div>
-    <h1>If something <span>goes wrong</span></h1>
+    <h1>Every day, and <span>if something goes wrong</span></h1>
   </div>
 
-  <div class="problem">
+  <div class="box day">
+    <h2>Every morning</h2>
+    <ul>
+      <li>Switch the screen on. <b>Plan A:</b> double-click <b class="nw">START-KIOSK</b> (a laptop set to start automatically opens it by itself). <b>Plan B:</b> tap the orange <b>CIRS Videos</b> icon.</li>
+      <li>When nobody touches the screen for 90 seconds, the videos play silently one after another. This is normal: any touch brings back the topics.</li>
+    </ul>
+  </div>
+
+  <div class="box if">
     <h2>the screen shows something else (a web page, the tablet's home screen)</h2>
-    <p>Tap the orange <b>CIRS Videos</b> icon. If there is no icon, open Chrome. The page opens again.</p>
+    <p>Tap the orange <b>CIRS Videos</b> icon (Plan A: double-click <b class="nw">START-KIOSK</b>).</p>
   </div>
-
-  <div class="problem">
+  <div class="box if">
     <h2>a video does not play, or the screen is frozen</h2>
-    <p>Switch the screen off and on again, then tap the <b>CIRS Videos</b> icon.</p>
+    <p>Switch the screen off and on again, then open it as in “Every morning”.</p>
   </div>
-
-  <div class="problem">
-    <h2>the download is stuck or there is no Wi-Fi</h2>
-    <ol>
-      <li>Turn on a phone hotspot and connect the screen to it. The download continues by itself.</li>
-      <li>Or plug in the <b>USB pen drive</b>, tap <b>“Load from USB stick”</b>, open <b>CIRS-KIOSK › videos › hd</b>, select all 19 files (menu <b>⋮ › Select all</b>) and tap <b>Open</b>.</li>
-    </ol>
+  <div class="box if">
+    <h2>the download is stuck, or there is no Wi-Fi</h2>
+    <p>Connect the screen to a phone hotspot (the download continues by itself), or use <b>Load from USB stick</b> as in Plan B, step 1.</p>
   </div>
-
-  <div class="problem">
-    <h2>the screen has no Chrome, or the steps do not work</h2>
-    <p>Give the <b>Technician sheet</b> and the USB pen drive to the screen company's technician.</p>
+  <div class="box if">
+    <h2>neither Plan A nor Plan B works</h2>
+    <p>Give the <b>Technician sheet</b> and the pen drive to the screen company's technician.</p>
   </div>
-
-  <div class="problem">
+  <div class="box if">
     <h2>touch does not work at all</h2>
-    <p>Ask the technician to play <b>CIRS-Showreel.mp4</b> from the USB pen drive on <b>repeat</b>. All 19 videos then play one after another.</p>
+    <p>Ask the technician to play <b>CIRS-Showreel.mp4</b> (on the pen drive) on <b>repeat</b>. All 19 videos play one after another.</p>
   </div>
 
-  <div class="problem">
-    <h2>you are still stuck after 15 minutes</h2>
-    <p>Hold the orange words <b>“Keep Smiling”</b> (top right) for 5 seconds and enter PIN <b>2026</b>. Take a photo of the screen that opens and send it on WhatsApp to the number below.</p>
+  <div class="box">
+    <h2>Staff options (for checks and fixes)</h2>
+    <p>Hold the orange words <b>“Keep Smiling”</b> (top right) for 5 seconds, enter PIN <b>2026</b>:</p>
+    <ul>
+      <li><b>Run self-test</b> checks all 19 videos and shows ✓ or ✗ for each.</li>
+      <li><b>Volume</b> slider · <b>Loop only</b> plays the videos without touch · <b>Close</b> goes back.</li>
+      <li>Still stuck after 15 minutes? Take a photo of this screen and send it on WhatsApp to the number below.</li>
+    </ul>
   </div>
 
   <div class="help">
     <h2>Help</h2>
-    <p>Name: <span class="fill"></span></p>
-    <p>WhatsApp / phone: <span class="fill"></span></p>
+    <p>Name: <span class="fill" id="helpName"></span></p>
+    <p>WhatsApp / phone: <span class="fill" id="helpPhone"></span></p>
   </div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <script>
-  // ?url=https://... overrides the kiosk link printed on the card.
-  var link = new URLSearchParams(location.search).get('url') || 'https://cirs-booth.pages.dev/';
+  // ?url=… sets the kiosk link; ?name=…&phone=… print the helpline (else blank lines to write on).
+  var q = new URLSearchParams(location.search);
+  var link = q.get('url') || 'https://me-shivamo.github.io/cirs/';
   document.getElementById('url').textContent = link.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  if (q.get('name')) document.getElementById('helpName').textContent = q.get('name');
+  if (q.get('phone')) document.getElementById('helpPhone').textContent = q.get('phone');
   if (window.qrcode) {
     var qr = qrcode(0, 'M');
     qr.addData(link);
